@@ -1,3 +1,59 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest/globals": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "plugin:flowtype/recommended",
+    "plugin:import/warnings",
+    "plugin:import/errors",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/typescript",
+    "next/core-web-vitals"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "warnOnUnsupportedTypeScriptVersion": false
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "react",
+    "flowtype",
+    "jsx-a11y",
+    "eslint-plugin-jest"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "react/react-in-jsx-scope": "off",
+    "no-console": "warn",
+    "semi": "off",
+    "space-before-function-paren": "off",
+    "consistent-return": "error",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ],
+    "spaced-comment": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "flowtype/no-types-missing-file-annotation": "off",
+    "react/prop-types": "off",
+    "import/no-named-as-default-member": "off",
+    "react/jsx-key": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
