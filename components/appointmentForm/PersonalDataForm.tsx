@@ -122,6 +122,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
         <Box sx={styles.row}>
           <Controller
             name={'phoneNumber'}
+            defaultValue=""
             control={control}
             render={({field: {onChange, onBlur, value, name, ref}}) => (
               <TextField
@@ -156,6 +157,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
           <Controller
             name={'email'}
             control={control}
+            defaultValue=""
             render={({field: {onChange, onBlur, value, name, ref}}) => (
               <TextField
                 label="Email"
