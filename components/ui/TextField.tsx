@@ -1,10 +1,12 @@
 import * as React from 'react';
 import {TextField as MaterialTextField} from '@mui/material';
-import {styles} from './Button.styles';
+import {styles} from './TextField.styles';
 import {ChangeEventHandler} from 'react';
 
 interface Props {
   onChange?: any;
+  onBlur?: any;
+  inputRef?: any;
   disabled?: boolean;
   defaultValue?: string;
   name?: string;
@@ -20,6 +22,7 @@ interface Props {
 
 export const TextField: React.FC<Props> = ({
   onChange,
+  onBlur,
   name,
   value,
   control,
@@ -30,15 +33,19 @@ export const TextField: React.FC<Props> = ({
   multiline,
   defaultValue,
   rows,
+  inputRef,
   ...rest
 }) => {
+  // const forwardedInput = React.forwardRef(TextField);
   return (
     <MaterialTextField
       sx={style}
       error={error}
+      inputRef={inputRef}
       multiline={multiline}
       onChange={onChange}
       label={label}
+      onBlur={onBlur}
       value={value}
       rows={rows}
       name={name}

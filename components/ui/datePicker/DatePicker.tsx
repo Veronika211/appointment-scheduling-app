@@ -9,12 +9,15 @@ interface Props {
   label?: string;
   sxStyle?: any;
   name?: string;
+  onBlur?: any;
+  inputRef?: any;
 }
 
-export const DatePicker: React.FC<Props> = ({onChange, sxStyle, value, ...rest}) => {
+export const DatePicker: React.FC<Props> = ({onChange, inputRef, sxStyle, value, ...rest}) => {
   return (
     <Box sx={sxStyle}>
       <MaterialDatePicker
+        inputRef={inputRef}
         onChange={onChange}
         value={value}
         {...rest}

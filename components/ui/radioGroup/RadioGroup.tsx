@@ -13,11 +13,14 @@ interface Props {
   onValueChange?: any;
   disabled?: boolean;
   label?: string;
+  onBlur?: any;
   firstLabel?: string;
   error?: any;
   sx?: any;
   secondLabel?: string;
   selectedValue?: any;
+  innerRef?: any;
+  value?: any;
 }
 
 export const RadioGroup: React.FC<Props> = ({
@@ -26,6 +29,7 @@ export const RadioGroup: React.FC<Props> = ({
   label,
   firstLabel,
   secondLabel,
+  innerRef,
   sx,
   ...rest
 }) => {
@@ -43,7 +47,7 @@ export const RadioGroup: React.FC<Props> = ({
   return (
     <FormControl sx={[styles.container, sx]}>
       <FormLabel>{label}</FormLabel>
-      <MaterialRadioGroup value={value} onChange={handleChange} {...rest}>
+      <MaterialRadioGroup value={value} ref={innerRef} onChange={handleChange} {...rest}>
         <FormControlLabel value="yes" control={<Radio />} label={firstLabel} />
         <FormControlLabel value="no" control={<Radio />} label={secondLabel} />
       </MaterialRadioGroup>

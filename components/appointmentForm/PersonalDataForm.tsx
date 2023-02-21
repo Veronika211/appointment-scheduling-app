@@ -86,10 +86,14 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
             name="firstName"
             control={control}
             defaultValue=""
-            render={({field}) => (
+            render={({field: {onChange, onBlur, value, name, ref}}) => (
               <TextField
                 label="First Name"
-                {...field}
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                inputRef={ref}
+                name={name}
                 style={styles.leftElement}
                 error={errors.firstName ? true : false}
                 helperText={errors.firstName?.message}
@@ -101,13 +105,16 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
             name={'lastName'}
             control={control}
             defaultValue=""
-            render={({field}) => (
+            render={({field: {onChange, onBlur, value, name, ref}}) => (
               <TextField
                 label="Last Name"
-                {...field}
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                inputRef={ref}
                 error={errors.lastName ? true : false}
                 helperText={errors.lastName?.message}
-                value={field.value || ''}
+                // value={field.value || ''}
               />
             )}
           />
@@ -116,13 +123,16 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
           <Controller
             name={'phoneNumber'}
             control={control}
-            render={({field}) => (
+            render={({field: {onChange, onBlur, value, name, ref}}) => (
               <TextField
                 label="Phone Number"
                 style={styles.leftElement}
                 error={errors.phoneNumber ? true : false}
                 helperText={errors.phoneNumber?.message}
-                {...field}
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                inputRef={ref}
               />
             )}
           />
@@ -131,11 +141,14 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
             name={'dateOfBirth'}
             control={control}
             defaultValue={new Date().toString()}
-            render={({field}) => (
+            render={({field: {onChange, onBlur, value, name, ref}}) => (
               <DatePicker
                 label="Date of birth"
                 sxStyle={[styles.datePicker, styles.leftElement]}
-                {...field}
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                inputRef={ref}
               />
             )}
           />
@@ -143,12 +156,15 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
           <Controller
             name={'email'}
             control={control}
-            render={({field}) => (
+            render={({field: {onChange, onBlur, value, name, ref}}) => (
               <TextField
                 label="Email"
                 error={errors.email ? true : false}
                 helperText={errors.email?.message}
-                {...field}
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                inputRef={ref}
               />
             )}
           />
@@ -193,11 +209,14 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
             name="appointmentDate"
             control={control}
             defaultValue={new Date().toString()}
-            render={({field}) => (
+            render={({field: {onChange, onBlur, value, name, ref}}) => (
               <DatePicker
                 label="Date of appointment"
                 sxStyle={[styles.datePicker, styles.leftElement]}
-                {...field}
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                inputRef={ref}
               />
             )}
           />
@@ -220,13 +239,16 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
           name="firstTimeVisit"
           control={control}
           defaultValue={'yes'}
-          render={({field}) => (
+          render={({field: {onChange, onBlur, value, name, ref}}) => (
             <RadioGroup
               label="First time visitor *"
               firstLabel="Yes"
               secondLabel="No"
               error={errors.firstTimeVisit}
-              {...field}
+              onValueChange={onChange}
+              onBlur={onBlur}
+              value={value}
+              innerRef={ref}
             ></RadioGroup>
           )}
         />
