@@ -67,7 +67,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
   const [selectedTimeError, setSelectedTimeError] = useState(false);
 
   const onSubmit = (data: any) => {
-    console.log('clicked');
+    // console.log('clicked');
     if (selectedTime === '') {
       setSelectedTimeError(true);
       // console.log('You must select time of appointment!');

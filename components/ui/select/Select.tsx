@@ -46,11 +46,10 @@ export const Select: React.FC<Props> = ({
               onChange(event.target.value);
             }}
             onBlur={onBlur} // notify when input is touched
-            // value={value}
+            value={value}
             // inputRef={ref}
             label={label}
             sx={sxStyle}
-            //  {...field}
           >
             {children}
           </MaterialSelect>
