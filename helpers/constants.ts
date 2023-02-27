@@ -1,12 +1,12 @@
-import { IRoutes } from "./types";
+import {IRoutes} from './types';
 
 export const routes: IRoutes[] = [
   {
-        path: '/',
-        text: 'Home'
+    path: '/',
+    text: 'Home',
   },
   {
-        path: '/contact',
-        text: 'Contact'
-    }
-]
+    path: '/contact',
+    text: 'Contact',
+  },
+];

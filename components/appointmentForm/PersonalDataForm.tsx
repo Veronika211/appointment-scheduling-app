@@ -63,7 +63,12 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
     }
     //creating new object with form data and picked time since picked time is a box element and not in form data
     console.log(data);
-    const dataToSend = {...data, pickedTime: selectedTime};
+    const dataToSend = {
+      ...data,
+      dateOfBirth: new Date(data.dateOfBirth).toISOString(),
+      appointmentDate: new Date(data.appointmentDate).toISOString().slice(0, 10),
+      pickedTime: selectedTime,
+    };
     setActiveStep();
     setPersonalData(dataToSend);
     console.log('data to send', dataToSend);

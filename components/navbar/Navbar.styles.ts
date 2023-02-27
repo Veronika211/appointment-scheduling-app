@@ -1,19 +1,22 @@
 export const styles = {
-    navbar: {
-        background: '#D7EFEBff',
-        boxShadow: 'none'
+  navbar: {
+    background: '#D7EFEBff',
+    boxShadow: 'none',
+  },
+  toolbar: {
+    color: 'inherit',
+  },
+  logo: {
+    width: 30,
+    height: 30,
+  },
+  button: {
+    marginLeft: 'auto',
+    '&:hover': {
+      backgroundColor: 'transparent',
     },
-    toolbar: {
-        color: 'inherit'
-    },
-    logo:{
-        width: 30,
-        height: 30
-    },
-    button:{
-        marginLeft: 'auto'
-    },
-    tabs:{
-        marginLeft: 10
-    }
-}
+  },
+  tabs: {
+    marginLeft: 10,
+  },
+};
