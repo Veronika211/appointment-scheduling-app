@@ -1,56 +1,41 @@
 import * as React from 'react';
-import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup as MaterialRadioGroup,
-} from '@mui/material';
-import {useEffect} from 'react';
-import {styles} from './RadioGroup.styles';
+import Radio from '@mui/material/Radio';
+import {FormHelperText, RadioGroup as MaterialRadioGroup} from '@mui/material/';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 interface Props {
-  onValueChange?: any;
-  disabled?: boolean;
   label?: string;
-  onBlur?: any;
   firstLabel?: string;
-  error?: any;
-  sx?: any;
   secondLabel?: string;
-  selectedValue?: any;
-  innerRef?: any;
+  error?: any;
+  ref?: any;
+  helperText?: any;
+  selectedValue?: string;
   value?: any;
+  onChange?: any;
 }
 
-export const RadioGroup: React.FC<Props> = ({
-  onValueChange,
-  selectedValue,
-  label,
-  firstLabel,
-  secondLabel,
-  innerRef,
-  sx,
-  ...rest
-}) => {
-  const [value, setValue] = React.useState('no');
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onValueChange((event.target as HTMLInputElement).value);
-    setValue((event.target as HTMLInputElement).value);
-  };
-
-  useEffect(() => {
-    setValue(selectedValue);
-  }, [selectedValue]);
-
-  return (
-    <FormControl sx={[styles.container, sx]}>
-      <FormLabel>{label}</FormLabel>
-      <MaterialRadioGroup value={value} ref={innerRef} onChange={handleChange} {...rest}>
-        <FormControlLabel value="yes" control={<Radio />} label={firstLabel} />
-        <FormControlLabel value="no" control={<Radio />} label={secondLabel} />
-      </MaterialRadioGroup>
-    </FormControl>
-  );
-};
+export const RadioGroup: React.FC<Props> = React.forwardRef(
+  (
+    {label, helperText, firstLabel, error, secondLabel, selectedValue, onChange, value, ...rest},
+    ref,
+  ) => {
+    return (
+      <FormControl error={error ? true : false}>
+        <FormLabel id="demo-radio-buttons-group-label">{label}</FormLabel>
+        <MaterialRadioGroup
+          aria-labelledby="demo-radio-buttons-group-label"
+          defaultValue={selectedValue}
+          ref={ref}
+          onChange={onChange}
+        >
+          <FormControlLabel value="yes" control={<Radio />} label={firstLabel} />
+          <FormControlLabel value="no" control={<Radio />} label={secondLabel} />
+        </MaterialRadioGroup>
+        <FormHelperText>{helperText}</FormHelperText>
+      </FormControl>
+    );
+  },
+);

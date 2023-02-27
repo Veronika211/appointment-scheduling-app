@@ -5,49 +5,37 @@ import {Select} from '../ui/select/Select';
 import {TextField} from '../ui/TextField';
 import {Button} from '../ui/Button';
 import {styles} from './PersonalDataForm.styles';
-
 import {Controller, useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {useState} from 'react';
+import {Dispatch, SetStateAction, useState} from 'react';
 import TimeBox from '../ui/timeBox/TimeBox';
+import {IAppointmentFormInputs} from '../../helpers/types';
 
-interface IFormInputs {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  dateOfBirth: string;
-  firstTimeVisit: string;
-  appointmentDate: string;
-  appointmentTime: string;
-  examType: string;
-  examField: string;
-  pickedTime: string;
-}
 interface Props {
   setActiveStep: any;
+  personalData: IAppointmentFormInputs;
+  setPersonalData: Dispatch<SetStateAction<IAppointmentFormInputs>>;
 }
 
-const appointmentValidationSchema = yup.object({
-  firstName: yup.string().required('First name required'),
-  lastName: yup.string().required('Last name is required'),
-  phoneNumber: yup.string().required('Phone number is required'),
-  email: yup.string().required('Email is required').email('Email is invalid'),
-  dateOfBirth: yup.string().required('Date of birth is required'),
-  // firstTimeVisit: yup.string().required('First time visit is required'),
-  appointmentDate: yup.string().required('Appointment date is required'),
-  // appointmentTime: yup.string().required('Appointment time is required'),
-  // examType: yup.string().required('Exam type is required'),
-  examField: yup.string().required('Exam field is required'),
-  examType: yup.string().required('Exam type is required'),
-  // examType: yup.string().ensure().when('examField', {
-  //   is: '',
-  //   then: yup.string().required(),
-  // }),
-});
+//when we pass parameters here we can use them in validation (like default values, validation messages etc)
+const appointmentValidationSchema = (defaultValues: any) =>
+  yup.object({
+    firstName: yup.string().required('First name required'),
+    lastName: yup.string().required('Last name is required'),
+    phoneNumber: yup.string().required('Phone number is required'),
+    email: yup.string().required('Email is required').email('Email is invalid'),
+    dateOfBirth: yup.string().required('Date of birth is required'),
+    firstTimeVisit: yup
+      .string()
+      .required('First time visit is required')
+      .default(defaultValues.firstTimeVisit),
+    appointmentDate: yup.string().required('Appointment date is required'),
+    examField: yup.string().required('Exam field is required'),
+    examType: yup.string().required('Exam type is required'),
+  });
 
-const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
+const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPersonalData}) => {
   const examFields = ['Ginecology', 'Radiology', 'Pulmology', 'Orthopedics'];
   const examTypes = ['Ultrasound', 'General exam', 'CT scan'];
   const availableTimes = ['09:00', '10:30', '11:00', '12:15'];
@@ -58,23 +46,27 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
     reset,
     register,
     formState: {errors},
-  } = useForm<IFormInputs>({
-    resolver: yupResolver(appointmentValidationSchema),
+  } = useForm<IAppointmentFormInputs>({
+    resolver: yupResolver(
+      appointmentValidationSchema({firstTimeVisit: personalData.firstTimeVisit}),
+    ),
   });
 
-  const [selectedTime, setSelectedTime] = useState('');
-  const [examField, setExamField] = useState('');
+  const [selectedTime, setSelectedTime] = useState(personalData.pickedTime);
+  const [examField, setExamField] = useState(personalData.examField);
   const [selectedTimeError, setSelectedTimeError] = useState(false);
 
   const onSubmit = (data: any) => {
-    // console.log('clicked');
     if (selectedTime === '') {
       setSelectedTimeError(true);
-      // console.log('You must select time of appointment!');
       return;
     }
+    //creating new object with form data and picked time since picked time is a box element and not in form data
     console.log(data);
+    const dataToSend = {...data, pickedTime: selectedTime};
     setActiveStep();
+    setPersonalData(dataToSend);
+    console.log('data to send', dataToSend);
     reset();
   };
 
@@ -85,7 +77,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
           <Controller
             name="firstName"
             control={control}
-            defaultValue=""
+            defaultValue={personalData.firstName}
             render={({field: {onChange, onBlur, value, name, ref}}) => (
               <TextField
                 label="First Name"
@@ -104,7 +96,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
           <Controller
             name={'lastName'}
             control={control}
-            defaultValue=""
+            defaultValue={personalData.lastName}
             render={({field: {onChange, onBlur, value, name, ref}}) => (
               <TextField
                 label="Last Name"
@@ -122,7 +114,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
         <Box sx={styles.row}>
           <Controller
             name={'phoneNumber'}
-            defaultValue=""
+            defaultValue={personalData.phoneNumber}
             control={control}
             render={({field: {onChange, onBlur, value, name, ref}}) => (
               <TextField
@@ -141,7 +133,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
           <Controller
             name={'dateOfBirth'}
             control={control}
-            defaultValue={new Date().toString()}
+            defaultValue={personalData.dateOfBirth}
             render={({field: {onChange, onBlur, value, name, ref}}) => (
               <DatePicker
                 label="Date of birth"
@@ -157,7 +149,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
           <Controller
             name={'email'}
             control={control}
-            defaultValue=""
+            defaultValue={personalData.email}
             render={({field: {onChange, onBlur, value, name, ref}}) => (
               <TextField
                 label="Email"
@@ -177,12 +169,10 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
             label="Exam Field"
             name="examField"
             control={control}
-            defaultValue={examField}
+            defaultValue={personalData.examField}
             error={errors.examField ? true : false}
             onChangeProps={(value: string) => {
-              //console.log('form value', value);
               setExamField(value);
-              //console.log(value);
             }}
           >
             {examFields.map((field: any) => (
@@ -194,7 +184,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
 
           <Select
             sxStyle={[styles.select, styles.leftElement]}
-            defaultValue={''}
+            defaultValue={personalData.examType}
             label="Type of exam"
             name="examType"
             control={control}
@@ -210,7 +200,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
           <Controller
             name="appointmentDate"
             control={control}
-            defaultValue={new Date().toString()}
+            defaultValue={personalData.appointmentDate}
             render={({field: {onChange, onBlur, value, name, ref}}) => (
               <DatePicker
                 label="Date of appointment"
@@ -240,17 +230,15 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep}) => {
         <Controller
           name="firstTimeVisit"
           control={control}
-          defaultValue={'yes'}
-          render={({field: {onChange, onBlur, value, name, ref}}) => (
+          render={({field}) => (
             <RadioGroup
               label="First time visitor *"
               firstLabel="Yes"
               secondLabel="No"
               error={errors.firstTimeVisit}
-              onValueChange={onChange}
-              onBlur={onBlur}
-              value={value}
-              innerRef={ref}
+              helperText={errors.firstTimeVisit?.message}
+              selectedValue={personalData.firstTimeVisit}
+              {...field}
             ></RadioGroup>
           )}
         />

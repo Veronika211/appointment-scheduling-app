@@ -5,13 +5,32 @@ import {useState} from 'react';
 import {Stepper} from '../ui/stepper/Stepper';
 import PersonalDataForm from './PersonalDataForm';
 import SymptomsForm from './SymptomsForm';
+import {IAppointmentFormInputs} from '../../helpers/types';
 
 const AppointmentForm = (): JSX.Element => {
   const [activeStep, setActiveStep] = useState(0);
+  const [personalData, setPersonalData] = useState<IAppointmentFormInputs>({
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    dateOfBirth: new Date().toString(),
+    firstTimeVisit: 'yes',
+    appointmentDate: new Date().toString(),
+    examType: '',
+    examField: '',
+    pickedTime: '',
+  });
 
   const renderAppropriateForm = () => {
     if (activeStep === 0) {
-      return <PersonalDataForm setActiveStep={() => setActiveStep(activeStep + 1)} />;
+      return (
+        <PersonalDataForm
+          setActiveStep={() => setActiveStep(activeStep + 1)}
+          personalData={personalData}
+          setPersonalData={setPersonalData}
+        />
+      );
     }
     return <SymptomsForm />;
   };
