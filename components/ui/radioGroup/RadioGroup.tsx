@@ -4,6 +4,7 @@ import {FormHelperText, RadioGroup as MaterialRadioGroup} from '@mui/material/';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import {styles} from './RadioGroup.styles';
 
 interface Props {
   label?: string;
@@ -15,15 +16,27 @@ interface Props {
   selectedValue?: string;
   value?: any;
   onChange?: any;
+  sx?: any;
 }
 
 export const RadioGroup: React.FC<Props> = React.forwardRef(
   (
-    {label, helperText, firstLabel, error, secondLabel, selectedValue, onChange, value, ...rest},
+    {
+      label,
+      sx,
+      helperText,
+      firstLabel,
+      error,
+      secondLabel,
+      selectedValue,
+      onChange,
+      value,
+      ...rest
+    },
     ref,
   ) => {
     return (
-      <FormControl error={error ? true : false}>
+      <FormControl error={error ? true : false} sx={[styles.container, sx]}>
         <FormLabel id="demo-radio-buttons-group-label">{label}</FormLabel>
         <MaterialRadioGroup
           aria-labelledby="demo-radio-buttons-group-label"

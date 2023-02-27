@@ -24,4 +24,8 @@ export const styles = {
   submitButton: {
     marginTop: '30px',
   },
+  additionalFieldContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
 };

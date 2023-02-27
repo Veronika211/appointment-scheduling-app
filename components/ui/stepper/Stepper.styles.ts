@@ -4,7 +4,7 @@ export const styles = {
     width: '200px',
     color: '#77D5CBff',
   },
-  backButton: {
+  backButtonContainer: {
     display: 'flex',
     flexDirection: 'row',
     pt: 2,
@@ -12,6 +12,11 @@ export const styles = {
       paddingBottom: '13px',
       paddingTop: 0,
       marginLeft: '-135px',
+    },
+  },
+  backButton: {
+    '&:hover': {
+      backgroundColor: 'transparent',
     },
   },
 };

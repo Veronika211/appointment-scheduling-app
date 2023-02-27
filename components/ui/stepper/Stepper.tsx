@@ -101,12 +101,12 @@ export const Stepper: React.FC<Props> = ({activeStepProps, setActiveStepProps}) 
       ) : (
         <React.Fragment>
           <Typography sx={{mt: 2, mb: 1}}>Step {activeStep + 1}</Typography>
-          <Box sx={styles.backButton}>
+          <Box sx={styles.backButtonContainer}>
             <Button
               // color="inherit"
               disabled={activeStep === 0}
               onClick={handleBack}
-              // sx={{mr: 1}}
+              sxStyle={styles.backButton}
               text="Back"
               variant="text"
             />
