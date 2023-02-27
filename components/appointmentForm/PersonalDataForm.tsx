@@ -67,7 +67,6 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
     setActiveStep();
     setPersonalData(dataToSend);
     console.log('data to send', dataToSend);
-    reset();
   };
 
   return (
@@ -106,7 +105,6 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
                 inputRef={ref}
                 error={errors.lastName ? true : false}
                 helperText={errors.lastName?.message}
-                // value={field.value || ''}
               />
             )}
           />
@@ -190,12 +188,17 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             control={control}
             error={errors.examType ? true : false}
           >
-            {examField != '' &&
+            {examField != '' ? (
               examTypes.map((oneType: any) => (
                 <MenuItem value={oneType} key={oneType + Math.random()}>
                   {oneType}
                 </MenuItem>
-              ))}
+              ))
+            ) : (
+              <MenuItem value={''} key={Math.random()}>
+                {'You must choose exam field first.'}
+              </MenuItem>
+            )}
           </Select>
           <Controller
             name="appointmentDate"

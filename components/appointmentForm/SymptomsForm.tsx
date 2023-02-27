@@ -7,16 +7,11 @@ import {Button} from '../ui/Button';
 import * as yup from 'yup';
 import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {IAppointmentFormInputs, ISymptomsFormInputs} from '../../helpers/types';
 
-interface IFormInputs {
-  headache: boolean;
-  abdominalPain: boolean;
-  tingling: boolean;
-  dizziness: boolean;
-  musclePain: boolean;
-  anxiety: boolean;
-  alcohol: boolean;
-  smoker: boolean;
+interface Props {
+  setActiveStep: () => any;
+  resetPersonalData: (value: IAppointmentFormInputs) => void;
 }
 
 const sympthomsValidationSchema = yup.object({
@@ -29,21 +24,47 @@ const sympthomsValidationSchema = yup.object({
   smoker: yup.string().required('Required'),
   tingling: yup.string().required('Required'),
 });
-const SympthomsForm = (): JSX.Element => {
+const SympthomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX.Element => {
   const {
     handleSubmit,
     control,
     reset,
     formState: {errors},
-  } = useForm<IFormInputs>({
+  } = useForm<ISymptomsFormInputs>({
     resolver: yupResolver(sympthomsValidationSchema),
   });
 
+  const resetFormData = () => {
+    reset({
+      headache: '',
+      abdominalPain: '',
+      tingling: '',
+      dizziness: '',
+      musclePain: '',
+      anxiety: '',
+      alcohol: '',
+      smoker: '',
+    });
+    resetPersonalData({
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      email: '',
+      dateOfBirth: new Date().toString(),
+      firstTimeVisit: 'yes',
+      appointmentDate: new Date().toString(),
+      examType: '',
+      examField: '',
+      pickedTime: '',
+    });
+  };
   const onSubmit = (data: any) => {
     const dataToSend = {...data, additionalSympthoms: additionalField};
-    console.log(data);
+    console.log(dataToSend);
+    setActiveStep();
+    resetFormData();
+
     //to-do: send data to backend
-    reset();
   };
 
   const [additionalField, setAdditionalField] = useState('');

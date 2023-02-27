@@ -15,3 +15,14 @@ export interface IAppointmentFormInputs {
   examField: string;
   pickedTime: string;
 }
+
+export interface ISymptomsFormInputs {
+  headache: string;
+  abdominalPain: string;
+  tingling: string;
+  dizziness: string;
+  musclePain: string;
+  anxiety: string;
+  alcohol: string;
+  smoker: string;
+}

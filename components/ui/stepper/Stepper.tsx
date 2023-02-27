@@ -6,6 +6,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
 import {styles} from './Stepper.styles';
 import {Button} from '../Button';
+import handler from '../../../pages/api/hello';
 
 interface Props {
   activeStepProps: number;
@@ -18,13 +19,17 @@ export const Stepper: React.FC<Props> = ({activeStepProps, setActiveStepProps}) 
   const [activeStep, setActiveStep] = React.useState(0);
   // const [skipped, setSkipped] = React.useState(new Set<number>());
 
-  const isStepOptional = (step: number) => {
-    return step === 1;
-  };
+  // const isStepOptional = (step: number) => {
+  //   return step === 1;
+  // };
 
   //jer je dugme next van ove komponente
   React.useEffect(() => {
     setActiveStep(activeStepProps);
+    if (activeStep === steps.length - 1) {
+      handleReset();
+      return;
+    }
   }, [activeStepProps]);
 
   // const isStepSkipped = (step: number) => {
@@ -90,15 +95,16 @@ export const Stepper: React.FC<Props> = ({activeStepProps, setActiveStepProps}) 
           );
         })}
       </MaterialStepper>
-      {activeStep === steps.length ? (
-        <React.Fragment>
-          <Typography sx={{mt: 2, mb: 1}}>All steps completed - you&apos;re finished</Typography>
-          <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
-            <Box sx={{flex: '1 1 auto'}} />
-            <Button onClick={handleReset} text="Reset" variant="text" />
-          </Box>
-        </React.Fragment>
-      ) : (
+      {activeStep < steps.length && (
+        //   <React.Fragment>{handleReset()}</React.Fragment>
+        // ) : (
+        // <React.Fragment>
+        //   <Typography sx={{mt: 2, mb: 1}}>All steps completed - you&apos;re finished</Typography>
+        //   <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
+        //     <Box sx={{flex: '1 1 auto'}} />
+        //     <Button onClick={handleReset} text="Reset" variant="text" />
+        //   </Box>
+        // </React.Fragment>
         <React.Fragment>
           <Typography sx={{mt: 2, mb: 1}}>Step {activeStep + 1}</Typography>
           <Box sx={styles.backButtonContainer}>

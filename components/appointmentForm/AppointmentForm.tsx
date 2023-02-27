@@ -32,7 +32,12 @@ const AppointmentForm = (): JSX.Element => {
         />
       );
     }
-    return <SymptomsForm />;
+    return (
+      <SymptomsForm
+        setActiveStep={() => setActiveStep(activeStep + 1)}
+        resetPersonalData={(value: IAppointmentFormInputs) => setPersonalData(value)}
+      />
+    );
   };
 
   return (
