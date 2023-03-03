@@ -11,6 +11,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {Dispatch, SetStateAction, useState} from 'react';
 import TimeBox from '../ui/timeBox/TimeBox';
 import {IAppointmentFormInputs} from '../../helpers/types';
+import ControllerWrapper from '../controllerWrapper/ControllerWrapper';
 
 interface Props {
   setActiveStep: any;
@@ -78,92 +79,65 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
     <Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={styles.row}>
-          <Controller
+          <ControllerWrapper
+            componentType="textField"
+            componentProps={{
+              label: 'First name',
+              error: errors.firstName ? true : false,
+              helperText: errors.firstName?.message,
+              style: styles.leftElement,
+            }}
             name="firstName"
             control={control}
             defaultValue={personalData.firstName}
-            render={({field: {onChange, onBlur, value, name, ref}}) => (
-              <TextField
-                label="First Name"
-                onChange={onChange}
-                onBlur={onBlur}
-                value={value}
-                inputRef={ref}
-                name={name}
-                style={styles.leftElement}
-                error={errors.firstName ? true : false}
-                helperText={errors.firstName?.message}
-              />
-            )}
           />
-
-          <Controller
-            name={'lastName'}
+          <ControllerWrapper
+            componentType="textField"
+            componentProps={{
+              label: 'Last name',
+              error: errors.lastName ? true : false,
+              helperText: errors.lastName?.message,
+            }}
+            name="lastName"
             control={control}
             defaultValue={personalData.lastName}
-            render={({field: {onChange, onBlur, value, name, ref}}) => (
-              <TextField
-                label="Last Name"
-                onChange={onChange}
-                onBlur={onBlur}
-                value={value}
-                inputRef={ref}
-                error={errors.lastName ? true : false}
-                helperText={errors.lastName?.message}
-              />
-            )}
           />
         </Box>
         <Box sx={styles.row}>
-          <Controller
-            name={'phoneNumber'}
-            defaultValue={personalData.phoneNumber}
+          <ControllerWrapper
+            componentType="textField"
+            componentProps={{
+              label: 'Phone number',
+              error: errors.phoneNumber ? true : false,
+              helperText: errors.phoneNumber?.message,
+              style: styles.leftElement,
+            }}
+            name="phoneNumber"
             control={control}
-            render={({field: {onChange, onBlur, value, name, ref}}) => (
-              <TextField
-                label="Phone Number"
-                style={styles.leftElement}
-                error={errors.phoneNumber ? true : false}
-                helperText={errors.phoneNumber?.message}
-                onChange={onChange}
-                onBlur={onBlur}
-                value={value}
-                inputRef={ref}
-              />
-            )}
+            defaultValue={personalData.phoneNumber}
           />
 
-          <Controller
-            name={'dateOfBirth'}
+          <ControllerWrapper
+            componentType="datePicker"
+            componentProps={{
+              label: 'Date of birth',
+              sxStyle: [styles.datePicker, styles.leftElement],
+            }}
+            name="dateOfBirth"
             control={control}
             defaultValue={personalData.dateOfBirth}
-            render={({field: {onChange, onBlur, value, name, ref}}) => (
-              <DatePicker
-                label="Date of birth"
-                sxStyle={[styles.datePicker, styles.leftElement]}
-                onChange={onChange}
-                onBlur={onBlur}
-                value={value}
-                inputRef={ref}
-              />
-            )}
           />
 
-          <Controller
-            name={'email'}
+          <ControllerWrapper
+            componentType="textField"
+            componentProps={{
+              label: 'Email',
+              error: errors.email ? true : false,
+              helperText: errors.email?.message,
+            }}
+            name="email"
             control={control}
             defaultValue={personalData.email}
-            render={({field: {onChange, onBlur, value, name, ref}}) => (
-              <TextField
-                label="Email"
-                error={errors.email ? true : false}
-                helperText={errors.email?.message}
-                onChange={onChange}
-                onBlur={onBlur}
-                value={value}
-                inputRef={ref}
-              />
-            )}
           />
         </Box>
         <Box sx={styles.row}>
@@ -203,20 +177,16 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
               <MenuItem value={''}>{'You must choose exam field first.'}</MenuItem>
             )}
           </Select>
-          <Controller
+
+          <ControllerWrapper
+            componentType="datePicker"
+            componentProps={{
+              label: 'Date of appointment',
+              sxStyle: [styles.datePicker, styles.leftElement],
+            }}
             name="appointmentDate"
             control={control}
             defaultValue={personalData.appointmentDate}
-            render={({field: {onChange, onBlur, value, name, ref}}) => (
-              <DatePicker
-                label="Date of appointment"
-                sxStyle={[styles.datePicker, styles.leftElement]}
-                onChange={onChange}
-                onBlur={onBlur}
-                value={value}
-                inputRef={ref}
-              />
-            )}
           />
         </Box>
         <Box sx={styles.timeBox}>
@@ -233,20 +203,19 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
         {selectedTimeError && (
           <Typography color={'red'}>You must select time of appointment!</Typography>
         )}
-        <Controller
+
+        <ControllerWrapper
+          componentType="radioButton"
+          componentProps={{
+            label: 'First time visitor *',
+            firstLabel: 'Yes',
+            secondLabel: 'No',
+            error: errors.firstTimeVisit,
+            helperText: errors.firstTimeVisit?.message,
+            selectedValue: personalData.firstTimeVisit,
+          }}
           name="firstTimeVisit"
           control={control}
-          render={({field}) => (
-            <RadioGroup
-              label="First time visitor *"
-              firstLabel="Yes"
-              secondLabel="No"
-              error={errors.firstTimeVisit}
-              helperText={errors.firstTimeVisit?.message}
-              selectedValue={personalData.firstTimeVisit}
-              {...field}
-            ></RadioGroup>
-          )}
         />
 
         <Box sx={styles.row}>
