@@ -1,15 +1,19 @@
-import {Box, MenuItem, SelectChangeEvent, Typography} from '@mui/material';
-import {Controller} from 'react-hook-form';
+import {Box} from '@mui/material';
+import React, {ReactElement} from 'react';
+import {Control, Controller, ControllerRenderProps} from 'react-hook-form';
+import {IAppointmentFormInputs, TAppointmentFormFields} from '../../helpers/types';
 import {DatePicker} from '../ui/datePicker/DatePicker';
 import {RadioGroup} from '../ui/radioGroup/RadioGroup';
 import {TextField} from '../ui/TextField';
 
+type ComponentType = 'textField' | 'datePicker' | 'radioButton';
+
 interface Props {
-  componentType: string;
+  componentType: ComponentType;
   componentProps: any;
-  defaultValue?: any;
-  name: string;
-  control: any;
+  defaultValue?: string;
+  name: TAppointmentFormFields;
+  control: Control<IAppointmentFormInputs, any>;
 }
 
 const ControllerWrapper: React.FC<Props> = ({
@@ -19,7 +23,11 @@ const ControllerWrapper: React.FC<Props> = ({
   defaultValue,
   componentProps,
 }): JSX.Element => {
-  const renderAppropriateField = ({field}) => {
+  const renderAppropriateField = ({
+    field,
+  }: {
+    field: ControllerRenderProps<IAppointmentFormInputs, TAppointmentFormFields>;
+  }): ReactElement => {
     if (componentType === 'textField') {
       return (
         <TextField
@@ -40,7 +48,7 @@ const ControllerWrapper: React.FC<Props> = ({
           label={componentProps.label}
           firstLabel={componentProps.firstLabel}
           secondLabel={componentProps.secondLabel}
-          style={componentProps.style}
+          sx={componentProps.style}
           error={componentProps.error}
           helperText={componentProps.helperText}
           selectedValue={componentProps.selectedValue}
@@ -60,6 +68,7 @@ const ControllerWrapper: React.FC<Props> = ({
         />
       );
     }
+    return <React.Fragment />;
   };
   return (
     <Box>
