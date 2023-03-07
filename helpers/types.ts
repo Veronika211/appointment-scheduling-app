@@ -16,6 +16,12 @@ export interface IAppointmentFormInputs {
   pickedTime: string;
 }
 
+export interface IRequestConfig {
+  method: string;
+  url: string;
+  body: any;
+}
+
 export interface ISymptomsFormInputs {
   headache: string;
   abdominalPain: string;
