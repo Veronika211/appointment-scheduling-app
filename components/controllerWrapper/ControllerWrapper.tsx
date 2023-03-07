@@ -1,10 +1,10 @@
 import {Box} from '@mui/material';
 import React, {ReactElement} from 'react';
 import {Control, Controller, ControllerRenderProps} from 'react-hook-form';
-import {IAppointmentFormInputs, TAppointmentFormFields} from '../../helpers/types';
-import {DatePicker} from '../ui/datePicker/DatePicker';
-import {RadioGroup} from '../ui/radioGroup/RadioGroup';
-import {TextField} from '../ui/TextField';
+import {IAppointmentFormInputs, TAppointmentFormFields} from '@helpers/types';
+import {DatePicker} from '@ui/datePicker/DatePicker';
+import {RadioGroup} from '@ui/radioGroup/RadioGroup';
+import {TextField} from '@ui/TextField';
 
 type ComponentType = 'textField' | 'datePicker' | 'radioButton';
 
