@@ -1,4 +1,4 @@
-import {Box, MenuItem, SelectChangeEvent, Typography} from '@mui/material';
+import {Box, MenuItem, Typography} from '@mui/material';
 import {Select} from '@/ui/select/Select';
 import {Button} from '@/ui/Button';
 import {styles} from './PersonalDataForm.styles';
