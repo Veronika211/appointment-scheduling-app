@@ -1,17 +1,14 @@
 import {Box, MenuItem, SelectChangeEvent, Typography} from '@mui/material';
-import {RadioGroup} from '../ui/radioGroup/RadioGroup';
-import {DatePicker} from '../ui/datePicker/DatePicker';
 import {Select} from '../ui/select/Select';
-import {TextField} from '../ui/TextField';
 import {Button} from '../ui/Button';
 import {styles} from './PersonalDataForm.styles';
-import {Controller, useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Dispatch, SetStateAction, useState} from 'react';
 import TimeBox from '../ui/timeBox/TimeBox';
 import {IAppointmentFormInputs} from '../../helpers/types';
 import ControllerWrapper from '../controllerWrapper/ControllerWrapper';
+import {useForm} from 'react-hook-form';
 
 interface Props {
   setActiveStep: any;
@@ -53,8 +50,10 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
     ),
   });
 
+  const {firstName, lastName, email, phoneNumber, examField, firstTimeVisit, examType} = errors;
+
   const [selectedTime, setSelectedTime] = useState(personalData.pickedTime);
-  const [examField, setExamField] = useState(personalData.examField);
+  const [examFieldState, setExamFieldState] = useState(personalData.examField);
   const [selectedTimeError, setSelectedTimeError] = useState(false);
 
   const onSubmit = (data: any) => {
@@ -83,8 +82,8 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             componentType="textField"
             componentProps={{
               label: 'First name',
-              error: !!errors.firstName,
-              helperText: errors.firstName?.message,
+              error: !!firstName,
+              helperText: firstName?.message,
               style: styles.leftElement,
             }}
             name="firstName"
@@ -95,8 +94,8 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             componentType="textField"
             componentProps={{
               label: 'Last name',
-              error: !!errors.lastName,
-              helperText: errors.lastName?.message,
+              error: !!lastName,
+              helperText: lastName?.message,
             }}
             name="lastName"
             control={control}
@@ -108,8 +107,8 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             componentType="textField"
             componentProps={{
               label: 'Phone number',
-              error: !!errors.phoneNumber,
-              helperText: errors.phoneNumber?.message,
+              error: !!phoneNumber,
+              helperText: phoneNumber?.message,
               style: styles.leftElement,
             }}
             name="phoneNumber"
@@ -121,7 +120,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             componentType="datePicker"
             componentProps={{
               label: 'Date of birth',
-              sxStyle: [styles.datePicker, styles.leftElement],
+              style: [styles.datePicker, styles.leftElement],
             }}
             name="dateOfBirth"
             control={control}
@@ -132,8 +131,8 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             componentType="textField"
             componentProps={{
               label: 'Email',
-              error: !!errors.email,
-              helperText: errors.email?.message,
+              error: !!email,
+              helperText: email?.message,
             }}
             name="email"
             control={control}
@@ -147,9 +146,9 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             name="examField"
             control={control}
             defaultValue={personalData.examField}
-            error={!!errors.examField}
+            error={!!examField}
             onChangeProps={(value: string) => {
-              setExamField(value);
+              setExamFieldState(value);
             }}
           >
             {examFields.map((field: any) => (
@@ -165,9 +164,9 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             label="Type of exam"
             name="examType"
             control={control}
-            error={!!errors.examType}
+            error={!!examType}
           >
-            {examField != '' ? (
+            {examFieldState != '' ? (
               examTypes.map((oneType: any) => (
                 <MenuItem value={oneType} key={oneType + Math.random()}>
                   {oneType}
@@ -182,7 +181,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             componentType="datePicker"
             componentProps={{
               label: 'Date of appointment',
-              sxStyle: [styles.datePicker, styles.leftElement],
+              style: [styles.datePicker, styles.leftElement],
             }}
             name="appointmentDate"
             control={control}
@@ -201,7 +200,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
           ))}
         </Box>
         {selectedTimeError && (
-          <Typography color={'red'}>You must select time of appointment!</Typography>
+          <Typography color="red">You must select time of appointment!</Typography>
         )}
 
         <ControllerWrapper
@@ -210,8 +209,8 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             label: 'First time visitor *',
             firstLabel: 'Yes',
             secondLabel: 'No',
-            error: errors.firstTimeVisit,
-            helperText: errors.firstTimeVisit?.message,
+            error: firstTimeVisit,
+            helperText: firstTimeVisit?.message,
             selectedValue: personalData.firstTimeVisit,
           }}
           name="firstTimeVisit"

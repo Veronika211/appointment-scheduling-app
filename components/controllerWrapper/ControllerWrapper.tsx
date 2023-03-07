@@ -23,6 +23,7 @@ const ControllerWrapper: React.FC<Props> = ({
   defaultValue,
   componentProps,
 }): JSX.Element => {
+  const {label, style, error, helperText, firstLabel, secondLabel, selectedValue} = componentProps;
   const renderAppropriateField = ({
     field,
   }: {
@@ -31,27 +32,27 @@ const ControllerWrapper: React.FC<Props> = ({
     if (componentType === 'textField') {
       return (
         <TextField
-          label={componentProps.label}
+          label={label}
           onChange={field.onChange}
           onBlur={field.onBlur}
           value={field.value}
           inputRef={field.ref}
-          style={componentProps.style}
-          error={componentProps.error ? true : false}
-          helperText={componentProps.helperText}
+          style={style}
+          error={error ? true : false}
+          helperText={helperText}
         />
       );
     }
     if (componentType === 'radioButton') {
       return (
         <RadioGroup
-          label={componentProps.label}
-          firstLabel={componentProps.firstLabel}
-          secondLabel={componentProps.secondLabel}
-          sx={componentProps.style}
-          error={componentProps.error}
-          helperText={componentProps.helperText}
-          selectedValue={componentProps.selectedValue}
+          label={label}
+          firstLabel={firstLabel}
+          secondLabel={secondLabel}
+          sx={style}
+          error={error}
+          helperText={helperText}
+          selectedValue={selectedValue}
           {...field}
         />
       );
@@ -59,8 +60,8 @@ const ControllerWrapper: React.FC<Props> = ({
     if (componentType === 'datePicker') {
       return (
         <DatePicker
-          label={componentProps.label}
-          sxStyle={componentProps.sxStyle}
+          label={label}
+          sxStyle={style}
           onChange={field.onChange}
           onBlur={field.onBlur}
           value={field.value}
