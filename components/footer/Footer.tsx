@@ -1,9 +1,5 @@
-  const Footer: React.FC = (): JSX.Element  => {
-    return (
-      <div>
-      </div>
-    );
-  };
+const Footer: React.FC = (): JSX.Element => {
+  return <div></div>;
+};
 
-  export default Footer
-  
+export default Footer;

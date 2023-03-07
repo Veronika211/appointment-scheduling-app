@@ -92,25 +92,17 @@
 
 // export default DragAndDropContainer;
 
-import { DndContext, closestCenter } from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { Box } from "@mui/material";
-import { useState } from "react";
-import SortableItems from "./SortableItems";
+import {DndContext, closestCenter} from '@dnd-kit/core';
+import {arrayMove, SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
+import {Box} from '@mui/material';
+import {useState} from 'react';
+import SortableItems from './SortableItems';
 
 const DragAndDropContainer = () => {
-  const [languages, setLanguages] = useState([
-    "JavaScript",
-    "Python",
-    "TypeScript",
-  ]);
+  const [languages, setLanguages] = useState(['JavaScript', 'Python', 'TypeScript']);
 
   const handleDragEnd = (event: any) => {
-    const { active, over } = event;
+    const {active, over} = event;
     if (active.id !== over.id) {
       setLanguages((items: any) => {
         const activeIndex = items.indexOf(active.id);
@@ -123,12 +115,9 @@ const DragAndDropContainer = () => {
 
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <Box sx={{ marginTop: 10 }}>
+      <Box sx={{marginTop: 10}}>
         <h1>The best programming languages!</h1>
-        <SortableContext
-          items={languages}
-          strategy={verticalListSortingStrategy}
-        >
+        <SortableContext items={languages} strategy={verticalListSortingStrategy}>
           {languages.map((language) => (
             <SortableItems key={language} id={language} />
           ))}

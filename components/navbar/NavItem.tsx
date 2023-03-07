@@ -1,6 +1,6 @@
-import { Tab, Tabs, Toolbar, Typography } from "@mui/material";
-import Link from "next/link";
-import { Button } from "../ui/Button";
+import {Tab, Tabs, Toolbar, Typography} from '@mui/material';
+import Link from 'next/link';
+import {Button} from '../ui/Button';
 
 interface navItemProps {
   href: string;
@@ -8,11 +8,7 @@ interface navItemProps {
   active: boolean;
 }
 
-const NavItem: React.FC<navItemProps> = ({
-  href,
-  text,
-  active,
-}): JSX.Element => {
+const NavItem: React.FC<navItemProps> = ({href, text, active}): JSX.Element => {
   return <Link href={href}></Link>;
 };
 
