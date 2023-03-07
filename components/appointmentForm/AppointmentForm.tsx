@@ -2,10 +2,10 @@
 import {Box, MenuItem, SelectChangeEvent, Typography} from '@mui/material';
 import {styles} from './AppointmentForm.styles';
 import {useState} from 'react';
-import {Stepper} from '../ui/stepper/Stepper';
+import {Stepper} from '@/ui/stepper/Stepper';
 import PersonalDataForm from './PersonalDataForm';
-import SymptomsForm from './SymptomsForm';
-import {IAppointmentFormInputs} from '../../helpers/types';
+import SymptomsForm from 'components/appointmentForm/SymptomsForm';
+import {IAppointmentFormInputs} from '@/helpers/types';
 
 const AppointmentForm = (): JSX.Element => {
   const [activeStep, setActiveStep] = useState(0);

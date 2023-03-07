@@ -1,6 +1,6 @@
 import {Box, Typography} from '@mui/material';
 import {useRouter} from 'next/router';
-import {Button} from './ui/Button';
+import {Button} from '@/ui/Button';
 import {styles} from './Landing.styles';
 
 const Landing = (): JSX.Element => {

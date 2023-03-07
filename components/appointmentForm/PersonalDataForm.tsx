@@ -1,16 +1,16 @@
 import {Box, MenuItem, SelectChangeEvent, Typography} from '@mui/material';
-import {RadioGroup} from '../ui/radioGroup/RadioGroup';
-import {DatePicker} from '../ui/datePicker/DatePicker';
-import {Select} from '../ui/select/Select';
-import {TextField} from '../ui/TextField';
-import {Button} from '../ui/Button';
+import {RadioGroup} from '@/ui/radioGroup/RadioGroup';
+import {DatePicker} from '@/ui/datePicker/DatePicker';
+import {Select} from '@/ui/select/Select';
+import {TextField} from '@/ui/TextField';
+import {Button} from '@/ui/Button';
 import {styles} from './PersonalDataForm.styles';
 import {Controller, useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Dispatch, SetStateAction, useState} from 'react';
-import TimeBox from '../ui/timeBox/TimeBox';
-import {IAppointmentFormInputs} from '../../helpers/types';
+import TimeBox from '@/ui/timeBox/TimeBox';
+import {IAppointmentFormInputs} from '@/helpers/types';
 
 interface Props {
   setActiveStep: any;

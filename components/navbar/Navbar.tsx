@@ -1,10 +1,7 @@
-import Link from 'next/link';
-import NavItem from './NavItem';
 import {AppBar as MaterialAppBar, Tab, Tabs, Toolbar} from '@mui/material';
-import {routes} from '../../helpers/constants';
-import logo from '../../assets/images/medical-icon.png';
+import logo from '@/assets/images/medical-icon.png';
 import {styles} from './Navbar.styles';
-import {Button} from '../ui/Button';
+import {Button} from '@/ui/Button';
 import {useRouter} from 'next/router';
 import {useState} from 'react';
 
@@ -33,7 +30,6 @@ function MainNavigation() {
           >
             <Tab label="Home" onClick={() => handleOnClick('/')} />
             <Tab label="Contact" onClick={() => handleOnClick('contact')} />
-            {/* <Link href={'/contact'}>Contact</Link> */}
           </Tabs>
           <Button variant="text" text="LOG OUT" sxStyle={styles.button} onClick={handleLogOut} />
         </Toolbar>
