@@ -1,4 +1,3 @@
-// import DragAndDropContainer from "./drag-and-drop-component/DragAndDropContainer";
 import {Box, MenuItem, SelectChangeEvent, Typography} from '@mui/material';
 import {styles} from './AppointmentForm.styles';
 import {useState} from 'react';
