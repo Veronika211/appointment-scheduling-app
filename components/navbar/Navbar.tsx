@@ -1,7 +1,7 @@
 import {AppBar as MaterialAppBar, Tab, Tabs, Toolbar} from '@mui/material';
-import logo from '@/assets/images/medical-icon.png';
-import {styles} from './Navbar.styles';
-import {Button} from '@/ui/Button';
+import logo from '@assets/images/medical-icon.png';
+import {styles} from 'components/navbar/Navbar.styles';
+import {Button} from '@ui/Button';
 import {useRouter} from 'next/router';
 import {useState} from 'react';
 

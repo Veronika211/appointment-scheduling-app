@@ -1,12 +1,12 @@
 import {Box, MenuItem, Typography} from '@mui/material';
-import {Select} from '@/ui/select/Select';
-import {Button} from '@/ui/Button';
-import {styles} from './PersonalDataForm.styles';
+import {Select} from '@ui/select/Select';
+import {Button} from '@ui/Button';
+import {styles} from 'components/appointmentForm/PersonalDataForm.styles';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Dispatch, SetStateAction, useState} from 'react';
-import TimeBox from '@/ui/timeBox/TimeBox';
-import {IAppointmentFormInputs} from '@/helpers/types';
+import TimeBox from '@ui/timeBox/TimeBox';
+import {IAppointmentFormInputs} from '@helpers/types';
 import ControllerWrapper from 'components/controllerWrapper/ControllerWrapper';
 import {useForm} from 'react-hook-form';
 

@@ -1,9 +1,9 @@
 import {ReactNode, useEffect, useState} from 'react';
-import AuthContext from '@/store/auth-context';
+import AuthContext from '@store/auth-context';
 import Landing from 'components/Landing';
 import Layout from 'components/layout/Layout';
 import {useUser} from '@auth0/nextjs-auth0/client';
-import Loader from '@/ui/loader/Loader';
+import Loader from '@ui/loader/Loader';
 
 interface Props {
   children: ReactNode;

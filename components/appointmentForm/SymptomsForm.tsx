@@ -1,13 +1,13 @@
 import {Box, Typography} from '@mui/material';
-import {styles} from './SymptomsForm.styles';
+import {styles} from 'components/appointmentForm/SymptomsForm.styles';
 import {useState} from 'react';
-import {TextField} from '@/ui/TextField';
-import {RadioGroup} from '@/ui/radioGroup/RadioGroup';
-import {Button} from '@/ui/Button';
+import {TextField} from '@ui/TextField';
+import {RadioGroup} from '@ui/radioGroup/RadioGroup';
+import {Button} from '@ui/Button';
 import * as yup from 'yup';
 import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {IAppointmentFormInputs, ISymptomsFormInputs} from '@/helpers/types';
+import {IAppointmentFormInputs, ISymptomsFormInputs} from '@helpers/types';
 
 interface Props {
   setActiveStep: () => any;
