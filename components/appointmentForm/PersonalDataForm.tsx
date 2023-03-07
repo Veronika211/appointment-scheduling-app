@@ -83,7 +83,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             componentType="textField"
             componentProps={{
               label: 'First name',
-              error: errors.firstName ? true : false,
+              error: !!errors.firstName,
               helperText: errors.firstName?.message,
               style: styles.leftElement,
             }}
@@ -95,7 +95,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             componentType="textField"
             componentProps={{
               label: 'Last name',
-              error: errors.lastName ? true : false,
+              error: !!errors.lastName,
               helperText: errors.lastName?.message,
             }}
             name="lastName"
@@ -108,7 +108,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             componentType="textField"
             componentProps={{
               label: 'Phone number',
-              error: errors.phoneNumber ? true : false,
+              error: !!errors.phoneNumber,
               helperText: errors.phoneNumber?.message,
               style: styles.leftElement,
             }}
@@ -132,7 +132,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             componentType="textField"
             componentProps={{
               label: 'Email',
-              error: errors.email ? true : false,
+              error: !!errors.email,
               helperText: errors.email?.message,
             }}
             name="email"
@@ -147,7 +147,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             name="examField"
             control={control}
             defaultValue={personalData.examField}
-            error={errors.examField ? true : false}
+            error={!!errors.examField}
             onChangeProps={(value: string) => {
               setExamField(value);
             }}
@@ -165,7 +165,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             label="Type of exam"
             name="examType"
             control={control}
-            error={errors.examType ? true : false}
+            error={!!errors.examType}
           >
             {examField != '' ? (
               examTypes.map((oneType: any) => (
