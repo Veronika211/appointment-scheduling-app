@@ -26,3 +26,15 @@ export interface ISymptomsFormInputs {
   alcohol: string;
   smoker: string;
 }
+
+export type TAppointmentFormFields =
+  | 'dateOfBirth'
+  | 'appointmentDate'
+  | 'firstName'
+  | 'lastName'
+  | 'phoneNumber'
+  | 'email'
+  | 'firstTimeVisit'
+  | 'examField'
+  | 'examType'
+  | 'pickedTime';
