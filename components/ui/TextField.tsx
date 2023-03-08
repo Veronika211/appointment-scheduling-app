@@ -1,7 +1,5 @@
 import * as React from 'react';
 import {TextField as MaterialTextField} from '@mui/material';
-import {styles} from './TextField.styles';
-import {ChangeEventHandler} from 'react';
 
 interface Props {
   onChange?: any;
@@ -10,7 +8,6 @@ interface Props {
   disabled?: boolean;
   defaultValue?: string;
   name?: string;
-  control?: any;
   label?: string;
   style?: any;
   value?: any;
@@ -25,7 +22,6 @@ export const TextField: React.FC<Props> = ({
   onBlur,
   name,
   value,
-  control,
   label,
   style,
   error,
@@ -36,7 +32,6 @@ export const TextField: React.FC<Props> = ({
   inputRef,
   ...rest
 }) => {
-  // const forwardedInput = React.forwardRef(TextField);
   return (
     <MaterialTextField
       sx={style}

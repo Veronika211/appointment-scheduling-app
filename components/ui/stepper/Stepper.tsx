@@ -6,7 +6,6 @@ import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
 import {styles} from './Stepper.styles';
 import {Button} from '../Button';
-import handler from '../../../pages/api/hello';
 
 interface Props {
   activeStepProps: number;
@@ -23,7 +22,11 @@ export const Stepper: React.FC<Props> = ({activeStepProps, setActiveStepProps}) 
   //   return step === 1;
   // };
 
-  //jer je dugme next van ove komponente
+  const handleReset = () => {
+    setActiveStep(0);
+    setActiveStepProps(0);
+  };
+
   React.useEffect(() => {
     setActiveStep(activeStepProps);
     if (activeStep === steps.length - 1) {
@@ -69,15 +72,10 @@ export const Stepper: React.FC<Props> = ({activeStepProps, setActiveStepProps}) 
   //   });
   // };
 
-  const handleReset = () => {
-    setActiveStep(0);
-    setActiveStepProps(0);
-  };
-
   return (
     <Box sx={{width: '80%'}}>
       <MaterialStepper activeStep={activeStep}>
-        {steps.map((label, index) => {
+        {steps.map((label) => {
           const stepProps: {completed?: boolean} = {};
           const labelProps: {
             optional?: React.ReactNode;

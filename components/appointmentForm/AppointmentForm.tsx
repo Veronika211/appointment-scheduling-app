@@ -1,4 +1,4 @@
-import {Box, MenuItem, SelectChangeEvent, Typography} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import {styles} from 'components/appointmentForm/AppointmentForm.styles';
 import {useState} from 'react';
 import {Stepper} from '@ui/stepper/Stepper';

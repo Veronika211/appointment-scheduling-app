@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {Box, Typography} from '@mui/material';
 import {styles} from './TimeBox.styles';
 

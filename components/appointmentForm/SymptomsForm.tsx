@@ -1,6 +1,6 @@
+import React, {useState} from 'react';
 import {Box, Typography} from '@mui/material';
 import {styles} from 'components/appointmentForm/SymptomsForm.styles';
-import {useState} from 'react';
 import {TextField} from '@ui/TextField';
 import {RadioGroup} from '@ui/radioGroup/RadioGroup';
 import {Button} from '@ui/Button';
@@ -58,16 +58,14 @@ const SympthomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX
       pickedTime: '',
     });
   };
+  const [additionalField, setAdditionalField] = useState('');
+
   const onSubmit = (data: any) => {
     const dataToSend = {...data, additionalSympthoms: additionalField};
-    console.log(dataToSend);
+    //to-do: send data to backend
     setActiveStep();
     resetFormData();
-
-    //to-do: send data to backend
   };
-
-  const [additionalField, setAdditionalField] = useState('');
 
   return (
     <Box sx={styles.mainContainer}>

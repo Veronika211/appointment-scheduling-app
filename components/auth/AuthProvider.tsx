@@ -10,12 +10,12 @@ interface Props {
 }
 const AuthProvider: React.FC<Props> = (props): JSX.Element => {
   const {children} = props;
-  const {user, error, isLoading} = useUser();
+  const {user, isLoading} = useUser();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (user) setIsLoggedIn(true);
-  }, []);
+  }, [user]);
 
   const renderContent = () => {
     if (user) {

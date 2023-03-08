@@ -4,6 +4,7 @@ import {styles} from 'components/navbar/Navbar.styles';
 import {Button} from '@ui/Button';
 import {useRouter} from 'next/router';
 import {useState} from 'react';
+import Image from 'next/image';
 
 function MainNavigation() {
   const router = useRouter();
@@ -21,7 +22,7 @@ function MainNavigation() {
     <>
       <MaterialAppBar sx={styles.navbar}>
         <Toolbar sx={styles.toolbar}>
-          <img src={logo.src} alt="navbar-logo" style={styles.logo} />
+          <Image src={logo.src} alt="navbar-logo" style={styles.logo} />
           <Tabs
             sx={styles.tabs}
             value={tabValue}

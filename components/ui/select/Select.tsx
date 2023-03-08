@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  Select as MaterialSelect,
-  SelectChangeEvent,
-} from '@mui/material';
+import {FormControl, FormHelperText, InputLabel, Select as MaterialSelect} from '@mui/material';
 import {Controller} from 'react-hook-form';
 
 interface Props {
@@ -35,11 +29,9 @@ export const Select: React.FC<Props> = ({
     <FormControl {...rest}>
       <InputLabel>{label}</InputLabel>
       <Controller
-        render={({field: {onChange, onBlur, value, name, ref}}) => (
+        render={({field: {onChange, onBlur, value}}) => (
           <MaterialSelect
             onChange={(event) => {
-              //console.log(event.target.value);
-              //console.log(onChangeProps);
               if (onChangeProps) {
                 onChangeProps(event.target.value);
               }
@@ -47,7 +39,6 @@ export const Select: React.FC<Props> = ({
             }}
             onBlur={onBlur} // notify when input is touched
             value={value}
-            // inputRef={ref}
             label={label}
             sx={sxStyle}
           >

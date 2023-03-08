@@ -1,10 +1,10 @@
+import React, {useState} from 'react';
 import {Box, MenuItem, Typography} from '@mui/material';
 import {Select} from '@ui/select/Select';
 import {Button} from '@ui/Button';
 import {styles} from 'components/appointmentForm/PersonalDataForm.styles';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {Dispatch, SetStateAction, useState} from 'react';
 import TimeBox from '@ui/timeBox/TimeBox';
 import {IAppointmentFormInputs} from '@helpers/types';
 import ControllerWrapper from 'components/controllerWrapper/ControllerWrapper';
@@ -13,7 +13,7 @@ import {useForm} from 'react-hook-form';
 interface Props {
   setActiveStep: any;
   personalData: IAppointmentFormInputs;
-  setPersonalData: Dispatch<SetStateAction<IAppointmentFormInputs>>;
+  setPersonalData: React.Dispatch<React.SetStateAction<IAppointmentFormInputs>>;
 }
 
 //when we pass parameters here we can use them in validation (like default values, validation messages etc)
@@ -41,8 +41,6 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
   const {
     handleSubmit,
     control,
-    reset,
-    register,
     formState: {errors},
   } = useForm<IAppointmentFormInputs>({
     resolver: yupResolver(
@@ -62,7 +60,6 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
       return;
     }
     //creating new object with form data and picked time since picked time is a box element and not in form data
-    console.log(data);
     const dataToSend = {
       ...data,
       dateOfBirth: new Date(data.dateOfBirth).toISOString(),
@@ -71,7 +68,6 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
     };
     setActiveStep();
     setPersonalData(dataToSend);
-    console.log('data to send', dataToSend);
   };
 
   return (
