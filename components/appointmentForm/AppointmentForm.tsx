@@ -2,11 +2,11 @@ import {Box, Typography} from '@mui/material';
 import {styles} from 'components/appointmentForm/AppointmentForm.styles';
 import {useState} from 'react';
 import {Stepper} from '@ui/stepper/Stepper';
-import PersonalDataForm from 'components/appointmentForm/PersonalDataForm';
-import SymptomsForm from 'components/appointmentForm/SymptomsForm';
+import {PersonalDataForm} from 'components/appointmentForm/PersonalDataForm';
+import {SymptomsForm} from 'components/appointmentForm/SymptomsForm';
 import {IAppointmentFormInputs} from '@helpers/types';
 
-const AppointmentForm = (): JSX.Element => {
+export const AppointmentForm = (): JSX.Element => {
   const [activeStep, setActiveStep] = useState(0);
   const [personalData, setPersonalData] = useState<IAppointmentFormInputs>({
     firstName: '',
@@ -52,5 +52,3 @@ const AppointmentForm = (): JSX.Element => {
     </Box>
   );
 };
-
-export default AppointmentForm;

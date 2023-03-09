@@ -5,9 +5,9 @@ import {Button} from '@ui/Button';
 import {styles} from 'components/appointmentForm/PersonalDataForm.styles';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import TimeBox from '@ui/timeBox/TimeBox';
+import {TimeBox} from '@ui/timeBox/TimeBox';
 import {IAppointmentFormInputs} from '@helpers/types';
-import ControllerWrapper from 'components/controllerWrapper/ControllerWrapper';
+import {ControllerWrapper} from 'components/controllerWrapper/ControllerWrapper';
 import {useForm} from 'react-hook-form';
 
 interface Props {
@@ -33,7 +33,11 @@ const appointmentValidationSchema = (defaultValues: any) =>
     examType: yup.string().required('Exam type is required'),
   });
 
-const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPersonalData}) => {
+export const PersonalDataForm: React.FC<Props> = ({
+  setActiveStep,
+  personalData,
+  setPersonalData,
+}) => {
   const examFields = ['Ginecology', 'Radiology', 'Pulmology', 'Orthopedics'];
   const examTypes = ['Ultrasound', 'General exam', 'CT scan'];
   const availableTimes = ['09:00', '10:30', '11:00', '12:15'];
@@ -162,7 +166,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             control={control}
             error={!!examType}
           >
-            {examFieldState != '' ? (
+            {examFieldState !== '' ? (
               examTypes.map((oneType: any) => (
                 <MenuItem value={oneType} key={oneType + Math.random()}>
                   {oneType}
@@ -220,5 +224,3 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
     </Box>
   );
 };
-
-export default AppointmentForm;

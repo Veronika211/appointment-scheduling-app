@@ -24,7 +24,7 @@ const sympthomsValidationSchema = yup.object({
   smoker: yup.string().required('Required'),
   tingling: yup.string().required('Required'),
 });
-const SympthomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX.Element => {
+export const SymptomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX.Element => {
   const {
     handleSubmit,
     control,
@@ -214,12 +214,10 @@ const SympthomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setAdditionalField(event.target.value)
             }
-          ></TextField>
+          />
           <Button variant="contained" text="Submit" type="submit" sxStyle={styles.submitButton} />
         </Box>
       </form>
     </Box>
   );
 };
-
-export default SympthomsForm;

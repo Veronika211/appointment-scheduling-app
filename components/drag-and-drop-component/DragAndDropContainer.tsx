@@ -96,9 +96,9 @@ import {DndContext, closestCenter} from '@dnd-kit/core';
 import {arrayMove, SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import {Box} from '@mui/material';
 import {useState} from 'react';
-import SortableItems from './SortableItems';
+import {SortableItems} from './SortableItems';
 
-const DragAndDropContainer = () => {
+export const DragAndDropContainer = () => {
   const [languages, setLanguages] = useState(['JavaScript', 'Python', 'TypeScript']);
 
   const handleDragEnd = (event: any) => {
@@ -126,5 +126,3 @@ const DragAndDropContainer = () => {
     </DndContext>
   );
 };
-
-export default DragAndDropContainer;

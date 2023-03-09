@@ -20,23 +20,23 @@ interface Props {
 }
 
 export const RadioGroup: React.FC<Props> = React.forwardRef(
-  ({label, sx, helperText, firstLabel, error, secondLabel, selectedValue, onChange}, ref) => {
-    return (
-      <FormControl error={error ? true : false} sx={[styles.container, sx]}>
-        <FormLabel id="demo-radio-buttons-group-label">{label}</FormLabel>
-        <MaterialRadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue={selectedValue}
-          ref={ref}
-          onChange={onChange}
-        >
-          <FormControlLabel value="yes" control={<Radio />} label={firstLabel} />
-          <FormControlLabel value="no" control={<Radio />} label={secondLabel} />
-        </MaterialRadioGroup>
-        <FormHelperText>{helperText}</FormHelperText>
-      </FormControl>
-    );
-  },
+  ({
+    label, sx, helperText, firstLabel, error, secondLabel, selectedValue, onChange,
+  }, ref) => (
+    <FormControl error={!!error} sx={[styles.container, sx]}>
+      <FormLabel id="demo-radio-buttons-group-label">{label}</FormLabel>
+      <MaterialRadioGroup
+        aria-labelledby="demo-radio-buttons-group-label"
+        defaultValue={selectedValue}
+        ref={ref}
+        onChange={onChange}
+      >
+        <FormControlLabel value="yes" control={<Radio />} label={firstLabel} />
+        <FormControlLabel value="no" control={<Radio />} label={secondLabel} />
+      </MaterialRadioGroup>
+      <FormHelperText>{helperText}</FormHelperText>
+    </FormControl>
+  ),
 );
 
 RadioGroup.displayName = 'RadioGroup';

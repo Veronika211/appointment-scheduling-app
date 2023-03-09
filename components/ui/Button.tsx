@@ -14,18 +14,16 @@ interface Props {
   type?: ButtonType;
 }
 
-export const Button: React.FC<Props> = ({onClick, sxStyle, variant, text, type, ...rest}) => {
-  return (
-    <MaterialButton
-      size="large"
-      sx={[styles.btn, sxStyle, variant == 'contained' && styles.contained]}
-      variant={variant}
-      type={type}
-      onClick={onClick}
-      color="primary"
-      {...rest}
-    >
-      {text}
-    </MaterialButton>
-  );
-};
+export const Button: React.FC<Props> = ({onClick, sxStyle, variant, text, type, ...rest}) => (
+  <MaterialButton
+    size="large"
+    sx={[styles.btn, sxStyle, variant === 'contained' && styles.contained]}
+    variant={variant}
+    type={type}
+    onClick={onClick}
+    color="primary"
+    {...rest}
+  >
+    {text}
+  </MaterialButton>
+);

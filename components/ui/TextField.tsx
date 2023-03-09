@@ -31,22 +31,20 @@ export const TextField: React.FC<Props> = ({
   rows,
   inputRef,
   ...rest
-}) => {
-  return (
-    <MaterialTextField
-      sx={style}
-      error={error}
-      inputRef={inputRef}
-      multiline={multiline}
-      onChange={onChange}
-      label={label}
-      onBlur={onBlur}
-      value={value}
-      rows={rows}
-      name={name}
-      defaultValue={defaultValue}
-      helperText={helperText}
-      {...rest}
-    />
-  );
-};
+}) => (
+  <MaterialTextField
+    sx={style}
+    error={error}
+    inputRef={inputRef}
+    multiline={multiline}
+    onChange={onChange}
+    label={label}
+    onBlur={onBlur}
+    value={value}
+    rows={rows}
+    name={name}
+    defaultValue={defaultValue}
+    helperText={helperText}
+    {...rest}
+  />
+);

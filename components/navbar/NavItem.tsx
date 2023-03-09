@@ -1,14 +1,10 @@
 import * as React from 'react';
 import Link from 'next/link';
 
-interface navItemProps {
+interface NavItemProps {
   href: string;
   text: string;
   active: boolean;
 }
 
-const NavItem: React.FC<navItemProps> = ({href}): JSX.Element => {
-  return <Link href={href}></Link>;
-};
-
-export default NavItem;
+export const NavItem: React.FC<NavItemProps> = ({href}): JSX.Element => <Link href={href} />;

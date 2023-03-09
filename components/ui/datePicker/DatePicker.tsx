@@ -13,16 +13,16 @@ interface Props {
   inputRef?: any;
 }
 
-export const DatePicker: React.FC<Props> = ({onChange, inputRef, sxStyle, value, ...rest}) => {
-  return (
-    <Box sx={sxStyle}>
-      <MaterialDatePicker
-        inputRef={inputRef}
-        onChange={onChange}
-        value={value}
-        {...rest}
-        renderInput={(params) => <TextField {...params} />}
-      />
-    </Box>
-  );
-};
+export const DatePicker: React.FC<Props> = ({
+  onChange, inputRef, sxStyle, value, ...rest
+}) => (
+  <Box sx={sxStyle}>
+    <MaterialDatePicker
+      inputRef={inputRef}
+      onChange={onChange}
+      value={value}
+      {...rest}
+      renderInput={(params) => <TextField {...params} />}
+    />
+  </Box>
+);

@@ -1,14 +1,14 @@
-import {ReactNode, useEffect, useState} from 'react';
-import AuthContext from '@store/auth-context';
-import Landing from 'components/Landing';
-import Layout from 'components/layout/Layout';
+import {ReactNode, useEffect, useMemo, useState} from 'react';
+import {AuthContext} from '@store/auth-context';
+import {Landing} from 'components/Landing';
+import {Layout} from 'components/layout/Layout';
 import {useUser} from '@auth0/nextjs-auth0/client';
-import Loader from '@ui/loader/Loader';
+import {Loader} from '@ui/loader/Loader';
 
 interface Props {
   children: ReactNode;
 }
-const AuthProvider: React.FC<Props> = (props): JSX.Element => {
+export const AuthProvider: React.FC<Props> = (props): JSX.Element => {
   const {children} = props;
   const {user, isLoading} = useUser();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,6 +16,14 @@ const AuthProvider: React.FC<Props> = (props): JSX.Element => {
   useEffect(() => {
     if (user) setIsLoggedIn(true);
   }, [user]);
+
+  const contextValue = useMemo(
+    () => ({
+      isLoggedIn,
+      setIsLoggedIn,
+    }),
+    [isLoggedIn],
+  );
 
   const renderContent = () => {
     if (user) {
@@ -26,9 +34,5 @@ const AuthProvider: React.FC<Props> = (props): JSX.Element => {
 
   if (isLoading) return <Loader />;
 
-  return (
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn}}>{renderContent()}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={contextValue}>{renderContent()}</AuthContext.Provider>;
 };
-
-export default AuthProvider;

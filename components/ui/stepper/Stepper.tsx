@@ -31,8 +31,8 @@ export const Stepper: React.FC<Props> = ({activeStepProps, setActiveStepProps}) 
     setActiveStep(activeStepProps);
     if (activeStep === steps.length - 1) {
       handleReset();
-      return;
     }
+    // eslint-disable-next-line
   }, [activeStepProps]);
 
   // const isStepSkipped = (step: number) => {
@@ -103,7 +103,7 @@ export const Stepper: React.FC<Props> = ({activeStepProps, setActiveStepProps}) 
         //     <Button onClick={handleReset} text="Reset" variant="text" />
         //   </Box>
         // </React.Fragment>
-        <React.Fragment>
+        <>
           <Typography sx={{mt: 2, mb: 1}}>Step {activeStep + 1}</Typography>
           <Box sx={styles.backButtonContainer}>
             <Button
@@ -131,7 +131,7 @@ export const Stepper: React.FC<Props> = ({activeStepProps, setActiveStepProps}) 
               text={activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             /> */}
           </Box>
-        </React.Fragment>
+        </>
       )}
     </Box>
   );
