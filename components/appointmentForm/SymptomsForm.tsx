@@ -115,6 +115,7 @@ const SympthomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX
                 <RadioGroup
                   label="Do you feel dizziness?"
                   firstLabel="Yes"
+                  // firstLabel={'Yes'}
                   secondLabel="No"
                   sx={styles.leftElement}
                   error={errors.dizziness}

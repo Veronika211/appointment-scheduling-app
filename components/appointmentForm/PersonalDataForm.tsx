@@ -169,7 +169,7 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
                 </MenuItem>
               ))
             ) : (
-              <MenuItem value={''}>{'You must choose exam field first.'}</MenuItem>
+              <MenuItem value="">You must choose exam field first.</MenuItem>
             )}
           </Select>
 
