@@ -22,7 +22,7 @@ function MainNavigation() {
     <>
       <MaterialAppBar sx={styles.navbar}>
         <Toolbar sx={styles.toolbar}>
-          <Image src={logo.src} alt="navbar-logo" style={styles.logo} />
+          <Image src={logo.src} alt="navbar-logo" width={30} height={30} />
           <Tabs
             sx={styles.tabs}
             value={tabValue}
