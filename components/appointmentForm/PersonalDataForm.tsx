@@ -9,6 +9,7 @@ import TimeBox from '@ui/timeBox/TimeBox';
 import {IAppointmentFormInputs} from '@helpers/types';
 import ControllerWrapper from 'components/controllerWrapper/ControllerWrapper';
 import {useForm} from 'react-hook-form';
+import {convertToISOString, getOnlyDate} from 'utility/dateUtilities';
 
 interface Props {
   setActiveStep: any;
@@ -65,8 +66,8 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
     console.log(data);
     const dataToSend = {
       ...data,
-      dateOfBirth: new Date(data.dateOfBirth).toISOString(),
-      appointmentDate: new Date(data.appointmentDate).toISOString().slice(0, 10),
+      dateOfBirth: convertToISOString(data.dateOfBirth),
+      appointmentDate: getOnlyDate(convertToISOString(data.appointmentDate)),
       pickedTime: selectedTime,
     };
     setActiveStep();
