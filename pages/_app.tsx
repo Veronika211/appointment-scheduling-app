@@ -12,10 +12,10 @@ import '@fontsource/roboto/700.css';
 
 import {UserProvider} from '@auth0/nextjs-auth0/client';
 import {LocalizationProvider} from '@mui/x-date-pickers';
-import createEmotionCache from '../utility/createEmotionCache';
-import {themeOptions} from '../styles/theme/themeOptions';
-import '../styles/globals.css';
-import {AuthProvider} from '../components/auth/AuthProvider';
+import createEmotionCache from 'utility/createEmotionCache';
+import {themeOptions} from '@styles/theme/themeOptions';
+import '@styles/globals.css';
+import {AuthProvider} from 'components/auth/AuthProvider';
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
