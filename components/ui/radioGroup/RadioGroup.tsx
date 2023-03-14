@@ -4,7 +4,7 @@ import {FormHelperText, RadioGroup as MaterialRadioGroup} from '@mui/material/';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import {styles} from './RadioGroup.styles';
+import {styles} from '@ui/radioGroup/RadioGroup.styles';
 
 interface Props {
   label?: string;

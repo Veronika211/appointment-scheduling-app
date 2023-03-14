@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Button as MaterialButton} from '@mui/material';
-import {styles} from './Button.styles';
+import {styles} from '@ui/Button.styles';
 
 type VariantName = 'text' | 'contained' | 'outlined';
 type ButtonType = 'submit' | 'reset' | 'button';

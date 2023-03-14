@@ -4,8 +4,8 @@ import {Stepper as MaterialStepper} from '@mui/material';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
-import {styles} from './Stepper.styles';
-import {Button} from '../Button';
+import {styles} from '@ui/stepper/Stepper.styles';
+import {Button} from '@ui/Button';
 
 interface Props {
   activeStepProps: number;
