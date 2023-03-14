@@ -49,7 +49,9 @@
     "flowtype/no-types-missing-file-annotation": "off",
     "react/prop-types": "off",
     "import/no-named-as-default-member": "off",
-    "react/jsx-key": "off"
+    "react/jsx-key": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
   "settings": {
     "react": {
