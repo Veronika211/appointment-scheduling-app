@@ -6,10 +6,6 @@ export const styles = {
   toolbar: {
     color: 'inherit',
   },
-  logo: {
-    width: 30,
-    height: 30,
-  },
   button: {
     marginLeft: 'auto',
     '&:hover': {

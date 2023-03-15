@@ -1,5 +1,6 @@
+import * as React from 'react';
 import {Box, Typography} from '@mui/material';
-import {styles} from './TimeBox.styles';
+import {styles} from '@ui/timeBox/TimeBox.styles';
 
 interface Props {
   value: string;
@@ -8,12 +9,8 @@ interface Props {
   selectedTime: boolean;
 }
 
-const TimeBox: React.FC<Props> = ({value, onClick, selectedTime}) => {
-  return (
-    <Box sx={[styles.container, selectedTime && styles.selectedBox]} onClick={onClick}>
-      <Typography>{value}</Typography>
-    </Box>
-  );
-};
-
-export default TimeBox;
+export const TimeBox: React.FC<Props> = ({value, onClick, selectedTime}) => (
+  <Box sx={[styles.container, selectedTime && styles.selectedBox]} onClick={onClick}>
+    <Typography>{value}</Typography>
+  </Box>
+);

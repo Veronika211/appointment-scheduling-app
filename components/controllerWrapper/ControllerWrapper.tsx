@@ -16,7 +16,7 @@ interface Props {
   control: Control<IAppointmentFormInputs, any>;
 }
 
-const ControllerWrapper: React.FC<Props> = ({
+export const ControllerWrapper: React.FC<Props> = ({
   componentType,
   control,
   name,
@@ -38,7 +38,7 @@ const ControllerWrapper: React.FC<Props> = ({
           value={field.value}
           inputRef={field.ref}
           style={style}
-          error={error ? true : false}
+          error={!!error}
           helperText={helperText}
         />
       );
@@ -69,7 +69,8 @@ const ControllerWrapper: React.FC<Props> = ({
         />
       );
     }
-    return <React.Fragment />;
+    // eslint-disable-next-line
+    return <></>;
   };
   return (
     <Box>
@@ -82,5 +83,3 @@ const ControllerWrapper: React.FC<Props> = ({
     </Box>
   );
 };
-
-export default ControllerWrapper;
