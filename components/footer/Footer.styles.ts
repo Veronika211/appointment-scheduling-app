@@ -1,6 +1,6 @@
 export const styles = {
-    btn: {
-      height: '50px',
-      width: '200px'
-    }
-  };
+  btn: {
+    height: '50px',
+    width: '200px',
+  },
+};

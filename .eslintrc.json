@@ -15,7 +15,9 @@
     "plugin:import/errors",
     "plugin:jsx-a11y/recommended",
     "plugin:import/typescript",
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript"
   ],
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -23,7 +25,8 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "warnOnUnsupportedTypeScriptVersion": false
+    "warnOnUnsupportedTypeScriptVersion": false,
+    "project": "./tsconfig.json"
   },
   "plugins": [
     "@typescript-eslint",
@@ -41,9 +44,7 @@
     "space-before-function-paren": "off",
     "consistent-return": "error",
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": [
-      "error"
-    ],
+    "@typescript-eslint/no-use-before-define": ["error"],
     "spaced-comment": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "flowtype/no-types-missing-file-annotation": "off",
@@ -51,11 +52,34 @@
     "import/no-named-as-default-member": "off",
     "react/jsx-key": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-curly-brace-presence": [1, "never"],
+    "import/prefer-default-export": "off",
+    "import/no-default-export": "error",
+    "react/no-unused-prop-types": "off",
+    "@typescript-eslint/object-curly-spacing":"off",
+    "react/require-default-props":"off",
+    "max-len":"off",
+    "react/jsx-props-no-spreading":"off",
+    "react/function-component-definition":"off",
+    "object-curly-newline":"off",
+    "implicit-arrow-linebreak": "off",
+    "react/jsx-curly-newline":"off"
   },
   "settings": {
     "react": {
       "version": "detect"
     }
-  }
+  },
+  // We strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
+  // The checks it provides are already provided by TypeScript without the need for configuration - TypeScript
+  // just does this significantly better.
+  "overrides": [
+    {
+        "files": ["*.ts","*.tsx"],
+        "rules": {
+            "no-undef": "off"
+        }
+    }
+]
 }

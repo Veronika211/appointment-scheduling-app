@@ -1,9 +1,9 @@
 import {Box, Typography} from '@mui/material';
 import {useRouter} from 'next/router';
-import {Button} from './ui/Button';
-import {styles} from './Landing.styles';
+import {Button} from '@ui/Button';
+import {styles} from 'components/Landing.styles';
 
-const Landing = (): JSX.Element => {
+export const Landing = (): JSX.Element => {
   const router = useRouter();
 
   const handleSignIn = () => {
@@ -24,5 +24,3 @@ const Landing = (): JSX.Element => {
     </Box>
   );
 };
-
-export default Landing;
