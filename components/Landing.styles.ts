@@ -1,5 +1,5 @@
 import Image from '@assets/images/landing.jpg';
-import themeOptions from '@styles/theme/themeOptions';
+import {themeOptions} from '@styles/theme/themeOptions';
 
 export const styles = {
   container: {

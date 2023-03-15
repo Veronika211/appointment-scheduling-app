@@ -1,3 +1,4 @@
+/* eslint-disable  import/no-default-export */
 import * as React from 'react';
 import type {AppProps} from 'next/app';
 import {CacheProvider, EmotionCache} from '@emotion/react';
@@ -9,12 +10,12 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import createEmotionCache from '../utility/createEmotionCache';
-import themeOptions from '../styles/theme/themeOptions';
-import '../styles/globals.css';
 import {UserProvider} from '@auth0/nextjs-auth0/client';
-import AuthProvider from '../components/auth/AuthProvider';
 import {LocalizationProvider} from '@mui/x-date-pickers';
+import createEmotionCache from 'utility/createEmotionCache';
+import {themeOptions} from '@styles/theme/themeOptions';
+import '@styles/globals.css';
+import {AuthProvider} from 'components/auth/AuthProvider';
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;

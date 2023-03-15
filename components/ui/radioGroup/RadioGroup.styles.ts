@@ -1,4 +1,4 @@
-import themeOptions from '../../../styles/theme/themeOptions';
+import {themeOptions} from '@styles/theme/themeOptions';
 
 export const styles = {
   container: {

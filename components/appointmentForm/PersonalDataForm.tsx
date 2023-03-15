@@ -1,20 +1,20 @@
+import React, {useState} from 'react';
 import {Box, MenuItem, Typography} from '@mui/material';
 import {Select} from '@ui/select/Select';
 import {Button} from '@ui/Button';
 import {styles} from 'components/appointmentForm/PersonalDataForm.styles';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {Dispatch, SetStateAction, useState} from 'react';
-import TimeBox from '@ui/timeBox/TimeBox';
+import {TimeBox} from '@ui/timeBox/TimeBox';
 import {IAppointmentFormInputs} from '@helpers/types';
-import ControllerWrapper from 'components/controllerWrapper/ControllerWrapper';
+import {ControllerWrapper} from 'components/controllerWrapper/ControllerWrapper';
 import {useForm} from 'react-hook-form';
 import {convertToISOString, getOnlyDate} from 'utility/dateUtilities';
 
 interface Props {
   setActiveStep: any;
   personalData: IAppointmentFormInputs;
-  setPersonalData: Dispatch<SetStateAction<IAppointmentFormInputs>>;
+  setPersonalData: React.Dispatch<React.SetStateAction<IAppointmentFormInputs>>;
 }
 
 //when we pass parameters here we can use them in validation (like default values, validation messages etc)
@@ -34,7 +34,11 @@ const appointmentValidationSchema = (defaultValues: any) =>
     examType: yup.string().required('Exam type is required'),
   });
 
-const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPersonalData}) => {
+export const PersonalDataForm: React.FC<Props> = ({
+  setActiveStep,
+  personalData,
+  setPersonalData,
+}) => {
   const examFields = ['Ginecology', 'Radiology', 'Pulmology', 'Orthopedics'];
   const examTypes = ['Ultrasound', 'General exam', 'CT scan'];
   const availableTimes = ['09:00', '10:30', '11:00', '12:15'];
@@ -42,8 +46,6 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
   const {
     handleSubmit,
     control,
-    reset,
-    register,
     formState: {errors},
   } = useForm<IAppointmentFormInputs>({
     resolver: yupResolver(
@@ -63,7 +65,6 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
       return;
     }
     //creating new object with form data and picked time since picked time is a box element and not in form data
-    console.log(data);
     const dataToSend = {
       ...data,
       dateOfBirth: convertToISOString(data.dateOfBirth),
@@ -72,7 +73,6 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
     };
     setActiveStep();
     setPersonalData(dataToSend);
-    console.log('data to send', dataToSend);
   };
 
   return (
@@ -167,14 +167,14 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
             control={control}
             error={!!examType}
           >
-            {examFieldState != '' ? (
+            {examFieldState !== '' ? (
               examTypes.map((oneType: any) => (
                 <MenuItem value={oneType} key={oneType + Math.random()}>
                   {oneType}
                 </MenuItem>
               ))
             ) : (
-              <MenuItem value={''}>{'You must choose exam field first.'}</MenuItem>
+              <MenuItem value="">You must choose exam field first.</MenuItem>
             )}
           </Select>
 
@@ -225,5 +225,3 @@ const AppointmentForm: React.FC<Props> = ({setActiveStep, personalData, setPerso
     </Box>
   );
 };
-
-export default AppointmentForm;

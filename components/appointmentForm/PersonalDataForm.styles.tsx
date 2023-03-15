@@ -1,5 +1,3 @@
-import themeOptions from '../../styles/theme/themeOptions';
-
 export const styles = {
   row: {
     display: 'flex',

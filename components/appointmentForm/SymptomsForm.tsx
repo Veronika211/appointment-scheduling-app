@@ -1,6 +1,6 @@
+import React, {useState} from 'react';
 import {Box, Typography} from '@mui/material';
 import {styles} from 'components/appointmentForm/SymptomsForm.styles';
-import {useState} from 'react';
 import {TextField} from '@ui/TextField';
 import {RadioGroup} from '@ui/radioGroup/RadioGroup';
 import {Button} from '@ui/Button';
@@ -24,7 +24,7 @@ const sympthomsValidationSchema = yup.object({
   smoker: yup.string().required('Required'),
   tingling: yup.string().required('Required'),
 });
-const SympthomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX.Element => {
+export const SymptomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX.Element => {
   const {
     handleSubmit,
     control,
@@ -58,16 +58,14 @@ const SympthomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX
       pickedTime: '',
     });
   };
+  const [additionalField, setAdditionalField] = useState('');
+
   const onSubmit = (data: any) => {
     const dataToSend = {...data, additionalSympthoms: additionalField};
-    console.log(dataToSend);
+    //to-do: send data to backend
     setActiveStep();
     resetFormData();
-
-    //to-do: send data to backend
   };
-
-  const [additionalField, setAdditionalField] = useState('');
 
   return (
     <Box sx={styles.mainContainer}>
@@ -117,6 +115,7 @@ const SympthomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX
                 <RadioGroup
                   label="Do you feel dizziness?"
                   firstLabel="Yes"
+                  // firstLabel={'Yes'}
                   secondLabel="No"
                   sx={styles.leftElement}
                   error={errors.dizziness}
@@ -215,12 +214,10 @@ const SympthomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setAdditionalField(event.target.value)
             }
-          ></TextField>
+          />
           <Button variant="contained" text="Submit" type="submit" sxStyle={styles.submitButton} />
         </Box>
       </form>
     </Box>
   );
 };
-
-export default SympthomsForm;
