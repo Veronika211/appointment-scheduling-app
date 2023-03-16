@@ -46,24 +46,41 @@ const reducer = (state: IHTTPState = initialState, action: IAction) => {
 };
 
 const useHttp = (request: any) => {
+  //znaci mi pozovemo hook i prosledimo mu request koji ce biti poslat
+  //recimo zelimo da getujemo podatke o tipovima pregleda
+  // const {loading, data, error, sendRequest} = useHttp(requests.getExamTypes())
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const sendRequest = useCallback(
-    (args = {}) => {
+    //args su argumenti koje saljemo u requestu
+    (args?: any) => {
       const transformedRequest = transformRequest(request, args);
       dispatch({type: ActionTypes.FETCHING, payload: args});
       axios({
         ...transformedRequest,
-        data: args.body,
-        headers: {
-          'content-type': 'text/json',
-        },
+        // data: args?.body,
+        // headers: {
+        //   'content-type': 'text/json',
+        // },
       })
-        .then((response) => {
-          dispatch({type: ActionTypes.FETCHED, payload: response.data});
+        .then((response: any) => {
+          //here we format data we got from a firebase
+          if (transformedRequest.method === 'get') {
+            const responseData = response.data;
+            const loadedData: any = [];
+            for (const key in responseData) {
+              loadedData.push({
+                id: responseData[key].id,
+                value: responseData[key].name,
+              });
+            }
+            dispatch({type: ActionTypes.FETCHED, payload: loadedData});
+            return;
+          }
+          dispatch({type: ActionTypes.FETCHED, payload: response});
           return;
         })
-        .catch((error) => {
+        .catch((error: any) => {
           dispatch({
             type: ActionTypes.FETCH_ERROR,
             payload: error.response ?? {data: {message: 'Connection error'}},
@@ -96,7 +113,7 @@ const useHttp = (request: any) => {
 
 //funkcija prima dva parametra, request i args i vraca transformirani request
 //request
-const transformRequest = (request, args) => {
+const transformRequest = (request: any, args: any) => {
   //prvo kopiramo objekat tj request u transformed request
   const transformedRequest = {...request};
   //zatim proveravamo da li je prosledjen url, argumenti i parametar

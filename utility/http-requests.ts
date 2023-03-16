@@ -1,13 +1,13 @@
 export const getExamFields = () => {
   return {
-    url: '/examFields',
+    url: '/examFields.json',
     method: 'get',
   };
 };
 
 export const getExamTypes = () => {
   return {
-    url: '/examFields',
+    url: '/examTypes.json',
     method: 'get',
   };
 };
@@ -15,7 +15,7 @@ export const getExamTypes = () => {
 export const addAppointment = (data: any) => {
   return {
     url: '/appointments',
-    method: 'get',
+    method: 'post',
     body: data,
   };
 };

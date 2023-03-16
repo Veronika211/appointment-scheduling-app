@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Box, MenuItem, Typography} from '@mui/material';
 import {Select} from '@ui/select/Select';
 import {Button} from '@ui/Button';
@@ -9,6 +9,8 @@ import {TimeBox} from '@ui/timeBox/TimeBox';
 import {IAppointmentFormInputs} from '@helpers/types';
 import {ControllerWrapper} from 'components/controllerWrapper/ControllerWrapper';
 import {useForm} from 'react-hook-form';
+import useHttp from 'hooks/useHttp';
+import * as requests from 'utility/http-requests';
 
 interface Props {
   setActiveStep: any;
@@ -38,10 +40,19 @@ export const PersonalDataForm: React.FC<Props> = ({
   personalData,
   setPersonalData,
 }) => {
-  const examFields = ['Ginecology', 'Radiology', 'Pulmology', 'Orthopedics'];
-  const examTypes = ['Ultrasound', 'General exam', 'CT scan'];
+  // const examFields = ['Ginecology', 'Radiology', 'Pulmology', 'Orthopedics'];
+  // const examTypes = ['Ultrasound', 'General exam', 'CT scan'];
   const availableTimes = ['09:00', '10:30', '11:00', '12:15'];
-
+  const {
+    data: examFields,
+    error: examFieldsError,
+    sendRequest: getExamFields,
+  } = useHttp(requests.getExamFields());
+  const {
+    data: examTypes,
+    error: examTypesError,
+    sendRequest: getExamTypes,
+  } = useHttp(requests.getExamTypes());
   const {
     handleSubmit,
     control,
@@ -58,6 +69,13 @@ export const PersonalDataForm: React.FC<Props> = ({
   const [examFieldState, setExamFieldState] = useState(personalData.examField);
   const [selectedTimeError, setSelectedTimeError] = useState(false);
 
+  useEffect(() => {
+    getExamFields();
+    getExamTypes();
+  }, []);
+
+  console.log('examfields', examFields);
+  console.log('examTypes', examType);
   const onSubmit = (data: any) => {
     if (selectedTime === '') {
       setSelectedTimeError(true);
@@ -152,8 +170,8 @@ export const PersonalDataForm: React.FC<Props> = ({
             }}
           >
             {examFields.map((field: any) => (
-              <MenuItem value={field} key={field + Math.random()}>
-                {field}
+              <MenuItem value={field?.value} key={field?.id}>
+                {field?.value}
               </MenuItem>
             ))}
           </Select>
@@ -168,8 +186,8 @@ export const PersonalDataForm: React.FC<Props> = ({
           >
             {examFieldState !== '' ? (
               examTypes.map((oneType: any) => (
-                <MenuItem value={oneType} key={oneType + Math.random()}>
-                  {oneType}
+                <MenuItem value={oneType.value} key={oneType.id}>
+                  {oneType.value}
                 </MenuItem>
               ))
             ) : (

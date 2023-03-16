@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {
-  FormControl, FormHelperText, InputLabel, Select as MaterialSelect,
-} from '@mui/material';
+import {FormControl, FormHelperText, InputLabel, Select as MaterialSelect} from '@mui/material';
 import {Controller} from 'react-hook-form';
 
 interface Props {
