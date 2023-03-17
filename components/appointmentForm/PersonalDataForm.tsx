@@ -73,6 +73,12 @@ export const PersonalDataForm: React.FC<Props> = ({
     getExamTypes();
   }, []);
 
+  useEffect(() => {
+    if (examFieldsError || examTypesError) {
+      alert('There was a problem with fetching exam data!');
+    }
+  }, [examFieldsError, examTypesError]);
+
   const onSubmit = (data: any) => {
     if (selectedTime === '') {
       setSelectedTimeError(true);
