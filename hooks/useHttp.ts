@@ -46,22 +46,15 @@ const reducer = (state: IHTTPState = initialState, action: IAction) => {
 };
 
 const useHttp = (request: any) => {
-  //znaci mi pozovemo hook i prosledimo mu request koji ce biti poslat
-  //recimo zelimo da getujemo podatke o tipovima pregleda
-  // const {loading, data, error, sendRequest} = useHttp(requests.getExamTypes())
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const sendRequest = useCallback(
-    //args su argumenti koje saljemo u requestu
     (args?: any) => {
       const transformedRequest = transformRequest(request, args);
       dispatch({type: ActionTypes.FETCHING, payload: args});
       axios({
         ...transformedRequest,
         data: args?.body,
-        // headers: {
-        //   'content-type': 'text/json',
-        // },
       })
         .then((response: any) => {
           //here we format data we got from a firebase
@@ -111,21 +104,15 @@ const useHttp = (request: any) => {
   };
 };
 
-//funkcija prima dva parametra, request i args i vraca transformirani request
-//request
 const transformRequest = (request: any, args: any) => {
-  //prvo kopiramo objekat tj request u transformed request
   const transformedRequest = {...request};
-  //zatim proveravamo da li je prosledjen url, argumenti i parametar
+
   if (transformedRequest.url && args && args.params) {
-    // ako je prosledjeno sve to prolazimo kroz parametre i menjamo defaultni parametar sa prosledjenim
-    //parametrom
     for (const param in args.params) {
       transformedRequest.url = transformedRequest.url.replace(`:${param}`, args.params[param]);
     }
   }
-  //ako je prosledjen url, argumenti i kveri parametar pravimo novi niz koji predstavlja te parametre
-  // i sve to nalepimo na url
+
   if (transformedRequest.url && args && args.query) {
     const queryArray = [];
     for (const param in args.query) {
