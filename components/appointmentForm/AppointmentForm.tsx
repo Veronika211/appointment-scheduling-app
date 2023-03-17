@@ -5,6 +5,7 @@ import {Stepper} from '@ui/stepper/Stepper';
 import {PersonalDataForm} from 'components/appointmentForm/PersonalDataForm';
 import {SymptomsForm} from 'components/appointmentForm/SymptomsForm';
 import {IAppointmentFormInputs} from '@helpers/types';
+import {createStringDate} from 'utility/dateUtilities';
 
 export const AppointmentForm = (): JSX.Element => {
   const [activeStep, setActiveStep] = useState(0);
@@ -13,9 +14,9 @@ export const AppointmentForm = (): JSX.Element => {
     lastName: '',
     phoneNumber: '',
     email: '',
-    dateOfBirth: new Date().toString(),
+    dateOfBirth: createStringDate(),
     firstTimeVisit: 'yes',
-    appointmentDate: new Date().toString(),
+    appointmentDate: createStringDate(),
     examType: '',
     examField: '',
     pickedTime: '',

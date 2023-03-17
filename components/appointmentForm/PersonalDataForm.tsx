@@ -11,6 +11,7 @@ import {ControllerWrapper} from 'components/controllerWrapper/ControllerWrapper'
 import {useForm} from 'react-hook-form';
 import useHttp from 'hooks/useHttp';
 import * as requests from 'utility/http-requests';
+import {convertToISOString, getOnlyDate} from 'utility/dateUtilities';
 
 interface Props {
   setActiveStep: any;
@@ -84,8 +85,8 @@ export const PersonalDataForm: React.FC<Props> = ({
     //creating new object with form data and picked time since picked time is a box element and not in form data
     const dataToSend = {
       ...data,
-      dateOfBirth: new Date(data.dateOfBirth).toISOString(),
-      appointmentDate: new Date(data.appointmentDate).toISOString().slice(0, 10),
+      dateOfBirth: convertToISOString(data.dateOfBirth),
+      appointmentDate: getOnlyDate(convertToISOString(data.appointmentDate)),
       pickedTime: selectedTime,
     };
     setActiveStep();
