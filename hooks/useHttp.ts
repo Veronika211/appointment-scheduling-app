@@ -58,7 +58,7 @@ const useHttp = (request: any) => {
       dispatch({type: ActionTypes.FETCHING, payload: args});
       axios({
         ...transformedRequest,
-        // data: args?.body,
+        data: args?.body,
         // headers: {
         //   'content-type': 'text/json',
         // },

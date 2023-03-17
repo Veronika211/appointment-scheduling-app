@@ -9,10 +9,13 @@ import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {IAppointmentFormInputs, ISymptomsFormInputs} from '@helpers/types';
 import {createStringDate} from 'utility/dateUtilities';
+import useHttp from 'hooks/useHttp';
+import * as requests from 'utility/http-requests';
 
 interface Props {
   setActiveStep: () => any;
   resetPersonalData: (value: IAppointmentFormInputs) => void;
+  personalData: IAppointmentFormInputs;
 }
 
 const sympthomsValidationSchema = yup.object({
@@ -25,7 +28,11 @@ const sympthomsValidationSchema = yup.object({
   smoker: yup.string().required('Required'),
   tingling: yup.string().required('Required'),
 });
-export const SymptomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}): JSX.Element => {
+export const SymptomsForm: React.FC<Props> = ({
+  setActiveStep,
+  resetPersonalData,
+  personalData,
+}): JSX.Element => {
   const {
     handleSubmit,
     control,
@@ -60,10 +67,11 @@ export const SymptomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}
     });
   };
   const [additionalField, setAdditionalField] = useState('');
+  const {data, error, sendRequest} = useHttp(requests.addAppointment());
 
   const onSubmit = (data: any) => {
-    const dataToSend = {...data, additionalSympthoms: additionalField};
-    //to-do: send data to backend
+    const dataToSend = {...personalData, ...data, additionalSympthoms: additionalField};
+    sendRequest({body: dataToSend});
     setActiveStep();
     resetFormData();
   };

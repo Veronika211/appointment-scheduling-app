@@ -12,10 +12,9 @@ export const getExamTypes = () => {
   };
 };
 
-export const addAppointment = (data: any) => {
+export const addAppointment = () => {
   return {
-    url: '/appointments',
+    url: '/appointments.json',
     method: 'post',
-    body: data,
   };
 };

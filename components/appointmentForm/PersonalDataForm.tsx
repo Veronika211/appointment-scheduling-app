@@ -41,8 +41,6 @@ export const PersonalDataForm: React.FC<Props> = ({
   personalData,
   setPersonalData,
 }) => {
-  // const examFields = ['Ginecology', 'Radiology', 'Pulmology', 'Orthopedics'];
-  // const examTypes = ['Ultrasound', 'General exam', 'CT scan'];
   const availableTimes = ['09:00', '10:30', '11:00', '12:15'];
   const {
     data: examFields,
@@ -75,8 +73,6 @@ export const PersonalDataForm: React.FC<Props> = ({
     getExamTypes();
   }, []);
 
-  console.log('examfields', examFields);
-  console.log('examTypes', examType);
   const onSubmit = (data: any) => {
     if (selectedTime === '') {
       setSelectedTimeError(true);
