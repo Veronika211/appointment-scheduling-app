@@ -8,6 +8,7 @@ import * as yup from 'yup';
 import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {IAppointmentFormInputs, ISymptomsFormInputs} from '@helpers/types';
+import {createStringDate} from 'utility/dateUtilities';
 
 interface Props {
   setActiveStep: () => any;
@@ -50,9 +51,9 @@ export const SymptomsForm: React.FC<Props> = ({setActiveStep, resetPersonalData}
       lastName: '',
       phoneNumber: '',
       email: '',
-      dateOfBirth: new Date().toString(),
+      dateOfBirth: createStringDate(),
       firstTimeVisit: 'yes',
-      appointmentDate: new Date().toString(),
+      appointmentDate: createStringDate(),
       examType: '',
       examField: '',
       pickedTime: '',
