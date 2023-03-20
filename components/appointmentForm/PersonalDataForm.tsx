@@ -6,7 +6,7 @@ import {styles} from 'components/appointmentForm/PersonalDataForm.styles';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {TimeBox} from '@ui/timeBox/TimeBox';
-import {IAppointmentFormInputs} from '@helpers/types';
+import {IAppointmentFormInputs, IBackendData} from '@helpers/types';
 import {ControllerWrapper} from 'components/controllerWrapper/ControllerWrapper';
 import {useForm} from 'react-hook-form';
 import useHttp from 'hooks/useHttp';
@@ -41,7 +41,7 @@ export const PersonalDataForm: React.FC<Props> = ({
   personalData,
   setPersonalData,
 }) => {
-  const availableTimes = ['09:00', '10:30', '11:00', '12:15'];
+  // const availableTimes = ['09:00', '10:30', '11:00', '12:15'];
   const {
     data: examFields,
     error: examFieldsError,
@@ -52,6 +52,11 @@ export const PersonalDataForm: React.FC<Props> = ({
     error: examTypesError,
     sendRequest: getExamTypes,
   } = useHttp(requests.getExamTypes());
+  const {
+    data: availableTimes,
+    error: availableTimesError,
+    sendRequest: getAvailableTimes,
+  } = useHttp(requests.getAvailableTimes());
   const {
     handleSubmit,
     control,
@@ -71,10 +76,11 @@ export const PersonalDataForm: React.FC<Props> = ({
   useEffect(() => {
     getExamFields();
     getExamTypes();
+    getAvailableTimes();
   }, []);
 
   useEffect(() => {
-    if (examFieldsError || examTypesError) {
+    if (examFieldsError || examTypesError || availableTimesError) {
       alert('There was a problem with fetching exam data!');
     }
   }, [examFieldsError, examTypesError]);
@@ -210,13 +216,13 @@ export const PersonalDataForm: React.FC<Props> = ({
           />
         </Box>
         <Box sx={styles.timeBox}>
-          {availableTimes.map((time: string) => (
+          {availableTimes.map((time: IBackendData) => (
             <TimeBox
               name="pickedTime"
-              value={time}
-              selectedTime={selectedTime === time}
-              key={time + Math.random()}
-              onClick={() => setSelectedTime(time)}
+              value={time.value}
+              selectedTime={selectedTime === time.value}
+              key={time.id}
+              onClick={() => setSelectedTime(time.value)}
             />
           ))}
         </Box>

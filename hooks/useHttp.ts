@@ -1,3 +1,4 @@
+import {IBackendData} from '@helpers/types';
 import {useCallback, useReducer} from 'react';
 import axios from '../axios-appointment-api';
 
@@ -60,7 +61,7 @@ const useHttp = (request: any) => {
           //here we format data we got from a firebase
           if (transformedRequest.method === 'get') {
             const responseData = response.data;
-            const loadedData: any = [];
+            const loadedData: IBackendData[] = [];
             for (const key in responseData) {
               loadedData.push({
                 id: responseData[key].id,

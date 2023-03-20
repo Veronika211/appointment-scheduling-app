@@ -18,3 +18,10 @@ export const addAppointment = () => {
     method: 'post',
   };
 };
+
+export const getAvailableTimes = () => {
+  return {
+    url: '/availableTimes.json',
+    method: 'get',
+  };
+};
