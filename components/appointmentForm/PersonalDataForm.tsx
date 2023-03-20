@@ -41,7 +41,6 @@ export const PersonalDataForm: React.FC<Props> = ({
   personalData,
   setPersonalData,
 }) => {
-  // const availableTimes = ['09:00', '10:30', '11:00', '12:15'];
   const {
     data: examFields,
     error: examFieldsError,
