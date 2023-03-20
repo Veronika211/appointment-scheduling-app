@@ -1,6 +1,6 @@
 import {IBackendData} from '@helpers/types';
 import {useCallback, useReducer} from 'react';
-import axios from '../axios-appointment-api';
+import axios from '../api/axios-appointment-api';
 
 interface IHTTPState {
   status: string;

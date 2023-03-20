@@ -177,7 +177,7 @@ export const PersonalDataForm: React.FC<Props> = ({
               setExamFieldState(value);
             }}
           >
-            {examFields.map((field: any) => (
+            {examFields.map((field: IBackendData) => (
               <MenuItem value={field?.value} key={field?.id}>
                 {field?.value}
               </MenuItem>
@@ -193,7 +193,7 @@ export const PersonalDataForm: React.FC<Props> = ({
             error={!!examType}
           >
             {examFieldState !== '' ? (
-              examTypes.map((oneType: any) => (
+              examTypes.map((oneType: IBackendData) => (
                 <MenuItem value={oneType.value} key={oneType.id}>
                   {oneType.value}
                 </MenuItem>
