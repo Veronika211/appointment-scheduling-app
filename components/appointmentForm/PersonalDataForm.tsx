@@ -83,7 +83,7 @@ export const PersonalDataForm: React.FC<Props> = ({
     if (examFieldsError || examTypesError || availableTimesError) {
       alert('There was a problem with fetching exam data!');
     }
-  }, [examFieldsError, examTypesError]);
+  }, [examFieldsError, examTypesError, availableTimesError]);
 
   const onSubmit = (data: any) => {
     if (selectedTime === '') {

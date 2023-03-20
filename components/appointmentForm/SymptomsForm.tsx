@@ -67,7 +67,7 @@ export const SymptomsForm: React.FC<Props> = ({
     });
   };
   const [additionalField, setAdditionalField] = useState('');
-  const {data, error, sendRequest} = useHttp(requests.addAppointment());
+  const {sendRequest} = useHttp(requests.addAppointment());
 
   const onSubmit = (data: any) => {
     const dataToSend = {...personalData, ...data, additionalSympthoms: additionalField};

@@ -13,8 +13,6 @@ enum ActionTypes {
   FETCHING = 'FETCHING',
   FETCHED = 'FETCHED',
   FETCH_ERROR = 'FETCH_ERROR',
-  ADD = 'ADD',
-  REMOVE = 'REMOVE',
 }
 
 interface IAction {
@@ -37,10 +35,6 @@ const reducer = (state: IHTTPState = initialState, action: IAction) => {
       return {...state, status: 'fetched', loading: false, data: action.payload};
     case ActionTypes.FETCH_ERROR:
       return {...state, status: 'error', loading: false, error: action.payload};
-    case ActionTypes.ADD:
-      return {...state, data: state.data.concat(action.payload)};
-    case ActionTypes.REMOVE:
-      return {...state, data: state.data.filter((el) => el.id !== action.payload)};
     default:
       return state;
   }
@@ -84,24 +78,9 @@ const useHttp = (request: any) => {
     [dispatch],
   );
 
-  const addItem = useCallback(
-    (item: any) => {
-      dispatch({type: ActionTypes.ADD, payload: item});
-    },
-    [dispatch],
-  );
-
-  const removeItem = useCallback(
-    (id: number | string) => {
-      dispatch({type: ActionTypes.REMOVE, payload: id});
-    },
-    [dispatch],
-  );
   return {
     ...state,
     sendRequest,
-    addItem,
-    removeItem,
   };
 };
 
