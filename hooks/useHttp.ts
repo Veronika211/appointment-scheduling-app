@@ -5,7 +5,7 @@ import axios from '../api/axios-appointment-api';
 interface IHTTPState {
   status: string;
   error: string | null;
-  data: Array<any>;
+  data: IBackendData[];
   loading: boolean;
 }
 
