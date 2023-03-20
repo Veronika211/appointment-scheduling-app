@@ -10,7 +10,7 @@ import {IAppointmentFormInputs, IBackendData} from '@helpers/types';
 import {ControllerWrapper} from 'components/controllerWrapper/ControllerWrapper';
 import {useForm} from 'react-hook-form';
 import useHttp from 'hooks/useHttp';
-import * as requests from 'utility/http-requests';
+import * as requests from 'api/http-requests';
 import {convertToISOString, getOnlyDate} from 'utility/dateUtilities';
 
 interface Props {

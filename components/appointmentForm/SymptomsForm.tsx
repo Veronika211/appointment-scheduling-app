@@ -10,7 +10,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {IAppointmentFormInputs, ISymptomsFormInputs} from '@helpers/types';
 import {createStringDate} from 'utility/dateUtilities';
 import useHttp from 'hooks/useHttp';
-import * as requests from 'utility/http-requests';
+import * as requests from 'api/http-requests';
 
 interface Props {
   setActiveStep: () => any;
