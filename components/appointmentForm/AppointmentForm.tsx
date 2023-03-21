@@ -36,6 +36,7 @@ export const AppointmentForm = (): JSX.Element => {
       <SymptomsForm
         setActiveStep={() => setActiveStep(activeStep + 1)}
         resetPersonalData={(value: IAppointmentFormInputs) => setPersonalData(value)}
+        personalData={personalData}
       />
     );
   };

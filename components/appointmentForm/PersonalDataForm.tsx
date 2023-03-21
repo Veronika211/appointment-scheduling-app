@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Box, MenuItem, Typography} from '@mui/material';
 import {Select} from '@ui/select/Select';
 import {Button} from '@ui/Button';
@@ -6,9 +6,11 @@ import {styles} from 'components/appointmentForm/PersonalDataForm.styles';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {TimeBox} from '@ui/timeBox/TimeBox';
-import {IAppointmentFormInputs} from '@helpers/types';
+import {IAppointmentFormInputs, IBackendData} from '@helpers/types';
 import {ControllerWrapper} from 'components/controllerWrapper/ControllerWrapper';
 import {useForm} from 'react-hook-form';
+import useHttp from 'hooks/useHttp';
+import * as requests from 'api/http-requests';
 import {convertToISOString, getOnlyDate} from 'utility/dateUtilities';
 
 interface Props {
@@ -39,10 +41,21 @@ export const PersonalDataForm: React.FC<Props> = ({
   personalData,
   setPersonalData,
 }) => {
-  const examFields = ['Ginecology', 'Radiology', 'Pulmology', 'Orthopedics'];
-  const examTypes = ['Ultrasound', 'General exam', 'CT scan'];
-  const availableTimes = ['09:00', '10:30', '11:00', '12:15'];
-
+  const {
+    data: examFields,
+    error: examFieldsError,
+    sendRequest: getExamFields,
+  } = useHttp(requests.getExamFields());
+  const {
+    data: examTypes,
+    error: examTypesError,
+    sendRequest: getExamTypes,
+  } = useHttp(requests.getExamTypes());
+  const {
+    data: availableTimes,
+    error: availableTimesError,
+    sendRequest: getAvailableTimes,
+  } = useHttp(requests.getAvailableTimes());
   const {
     handleSubmit,
     control,
@@ -58,6 +71,18 @@ export const PersonalDataForm: React.FC<Props> = ({
   const [selectedTime, setSelectedTime] = useState(personalData.pickedTime);
   const [examFieldState, setExamFieldState] = useState(personalData.examField);
   const [selectedTimeError, setSelectedTimeError] = useState(false);
+
+  useEffect(() => {
+    getExamFields();
+    getExamTypes();
+    getAvailableTimes();
+  }, []);
+
+  useEffect(() => {
+    if (examFieldsError || examTypesError || availableTimesError) {
+      alert('There was a problem with fetching exam data!');
+    }
+  }, [examFieldsError, examTypesError, availableTimesError]);
 
   const onSubmit = (data: any) => {
     if (selectedTime === '') {
@@ -152,9 +177,9 @@ export const PersonalDataForm: React.FC<Props> = ({
               setExamFieldState(value);
             }}
           >
-            {examFields.map((field: any) => (
-              <MenuItem value={field} key={field + Math.random()}>
-                {field}
+            {examFields.map((field: IBackendData) => (
+              <MenuItem value={field.value} key={field.id}>
+                {field.value}
               </MenuItem>
             ))}
           </Select>
@@ -168,9 +193,9 @@ export const PersonalDataForm: React.FC<Props> = ({
             error={!!examType}
           >
             {examFieldState !== '' ? (
-              examTypes.map((oneType: any) => (
-                <MenuItem value={oneType} key={oneType + Math.random()}>
-                  {oneType}
+              examTypes.map((oneType: IBackendData) => (
+                <MenuItem value={oneType.value} key={oneType.id}>
+                  {oneType.value}
                 </MenuItem>
               ))
             ) : (
@@ -190,13 +215,13 @@ export const PersonalDataForm: React.FC<Props> = ({
           />
         </Box>
         <Box sx={styles.timeBox}>
-          {availableTimes.map((time: string) => (
+          {availableTimes.map((time: IBackendData) => (
             <TimeBox
               name="pickedTime"
-              value={time}
-              selectedTime={selectedTime === time}
-              key={time + Math.random()}
-              onClick={() => setSelectedTime(time)}
+              value={time.value}
+              selectedTime={selectedTime === time.value}
+              key={time.id}
+              onClick={() => setSelectedTime(time.value)}
             />
           ))}
         </Box>

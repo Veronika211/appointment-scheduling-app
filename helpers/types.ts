@@ -1,3 +1,5 @@
+import {number, string} from 'prop-types';
+
 export interface IRoutes {
   path: string;
   text: string;
@@ -38,3 +40,8 @@ export type TAppointmentFormFields =
   | 'examField'
   | 'examType'
   | 'pickedTime';
+
+export interface IBackendData {
+  id: number;
+  value: string;
+}
