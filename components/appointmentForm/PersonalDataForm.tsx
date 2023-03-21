@@ -178,8 +178,8 @@ export const PersonalDataForm: React.FC<Props> = ({
             }}
           >
             {examFields.map((field: IBackendData) => (
-              <MenuItem value={field?.value} key={field?.id}>
-                {field?.value}
+              <MenuItem value={field.value} key={field.id}>
+                {field.value}
               </MenuItem>
             ))}
           </Select>
