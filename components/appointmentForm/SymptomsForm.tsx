@@ -13,7 +13,7 @@ import useHttp from 'hooks/useHttp';
 import * as requests from 'api/http-requests';
 
 interface Props {
-  setActiveStep: () => any;
+  setActiveStep: () => void;
   resetPersonalData: (value: IAppointmentFormInputs) => void;
   personalData: IAppointmentFormInputs;
 }
@@ -69,7 +69,7 @@ export const SymptomsForm: React.FC<Props> = ({
   const [additionalField, setAdditionalField] = useState('');
   const {sendRequest} = useHttp(requests.addAppointment());
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: ISymptomsFormInputs) => {
     const dataToSend = {...personalData, ...data, additionalSympthoms: additionalField};
     sendRequest({body: dataToSend});
     setActiveStep();
@@ -124,7 +124,6 @@ export const SymptomsForm: React.FC<Props> = ({
                 <RadioGroup
                   label="Do you feel dizziness?"
                   firstLabel="Yes"
-                  // firstLabel={'Yes'}
                   secondLabel="No"
                   sx={styles.leftElement}
                   error={errors.dizziness}

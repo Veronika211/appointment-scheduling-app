@@ -1,21 +1,20 @@
 import * as React from 'react';
 import {DesktopDatePicker as MaterialDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
 import {Box, TextField} from '@mui/material';
+import {SxProps, Theme} from '@mui/material/styles';
 
 interface Props {
-  onChange: any;
+  onChange: () => void;
   disabled?: boolean;
   value?: string;
   label?: string;
-  sxStyle?: any;
+  sxStyle?: SxProps<Theme>;
   name?: string;
-  onBlur?: any;
-  inputRef?: any;
+  onBlur?: () => void;
+  inputRef?: React.Ref<HTMLInputElement>;
 }
 
-export const DatePicker: React.FC<Props> = ({
-  onChange, inputRef, sxStyle, value, ...rest
-}) => (
+export const DatePicker: React.FC<Props> = ({onChange, inputRef, sxStyle, value, ...rest}) => (
   <Box sx={sxStyle}>
     <MaterialDatePicker
       inputRef={inputRef}

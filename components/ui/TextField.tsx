@@ -1,19 +1,19 @@
 import * as React from 'react';
-import {TextField as MaterialTextField} from '@mui/material';
+import {SxProps, TextField as MaterialTextField, Theme} from '@mui/material';
 
 interface Props {
-  onChange?: any;
-  onBlur?: any;
-  inputRef?: any;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: () => void;
+  inputRef?: React.Ref<HTMLInputElement>;
   disabled?: boolean;
   defaultValue?: string;
   name?: string;
   label?: string;
-  style?: any;
-  value?: any;
-  error?: any;
+  style?: SxProps<Theme>;
+  value?: string;
+  error?: boolean;
   rows?: number;
-  multiline?: any;
+  multiline?: boolean;
   helperText?: string;
 }
 

@@ -1,4 +1,4 @@
-import {IBackendData} from '@helpers/types';
+import {IBackendData, IRequest, IRequestArgs} from '@helpers/types';
 import {useCallback, useReducer} from 'react';
 import axios from '../api/axios-appointment-api';
 
@@ -40,18 +40,18 @@ const reducer = (state: IHTTPState = initialState, action: IAction) => {
   }
 };
 
-const useHttp = (request: any) => {
+const useHttp = (request: IRequest) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const sendRequest = useCallback(
-    (args?: any) => {
+    (args?: IRequestArgs) => {
       const transformedRequest = transformRequest(request, args);
       dispatch({type: ActionTypes.FETCHING, payload: args});
       axios({
         ...transformedRequest,
         data: args?.body,
       })
-        .then((response: any) => {
+        .then((response) => {
           //here we format data we got from a firebase
           if (transformedRequest.method === 'get') {
             const responseData = response.data;
@@ -68,7 +68,7 @@ const useHttp = (request: any) => {
           dispatch({type: ActionTypes.FETCHED, payload: response});
           return;
         })
-        .catch((error: any) => {
+        .catch((error) => {
           dispatch({
             type: ActionTypes.FETCH_ERROR,
             payload: error.response ?? {data: {message: 'Connection error'}},
@@ -84,7 +84,7 @@ const useHttp = (request: any) => {
   };
 };
 
-const transformRequest = (request: any, args: any) => {
+const transformRequest = (request: IRequest, args?: IRequestArgs) => {
   const transformedRequest = {...request};
 
   if (transformedRequest.url && args && args.params) {
