@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strictNullChecks": true
+  },
+  "include": ["components/", "hooks/", "helpers/", "pages/", "api/", "store/", "utility/"],
+  "exclude": ["node_modules", "pages/_app.tsx"]
+}

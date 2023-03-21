@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --check \"**/*.{ts,tsx}\"",
-    "format:fix": "prettier --write"
+    "format:fix": "prettier --write",
+    "typecheck": "tsc --project tsconfig.typeChecks.json"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.1.0",
