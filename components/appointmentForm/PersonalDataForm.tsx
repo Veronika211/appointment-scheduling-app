@@ -13,14 +13,18 @@ import useHttp from 'hooks/useHttp';
 import * as requests from 'api/http-requests';
 import {convertToISOString, getOnlyDate} from 'utility/dateUtilities';
 
-interface Props {
-  setActiveStep: any;
+interface IProps {
+  setActiveStep: () => void;
   personalData: IAppointmentFormInputs;
   setPersonalData: React.Dispatch<React.SetStateAction<IAppointmentFormInputs>>;
 }
 
+interface IDefaultValues {
+  firstTimeVisit: string;
+}
+
 //when we pass parameters here we can use them in validation (like default values, validation messages etc)
-const appointmentValidationSchema = (defaultValues: any) =>
+const appointmentValidationSchema = (defaultValues: IDefaultValues) =>
   yup.object({
     firstName: yup.string().required('First name required'),
     lastName: yup.string().required('Last name is required'),
@@ -36,7 +40,7 @@ const appointmentValidationSchema = (defaultValues: any) =>
     examType: yup.string().required('Exam type is required'),
   });
 
-export const PersonalDataForm: React.FC<Props> = ({
+export const PersonalDataForm: React.FC<IProps> = ({
   setActiveStep,
   personalData,
   setPersonalData,
@@ -84,7 +88,7 @@ export const PersonalDataForm: React.FC<Props> = ({
     }
   }, [examFieldsError, examTypesError, availableTimesError]);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: IAppointmentFormInputs) => {
     if (selectedTime === '') {
       setSelectedTimeError(true);
       return;
@@ -178,7 +182,7 @@ export const PersonalDataForm: React.FC<Props> = ({
             }}
           >
             {examFields.map((field: IBackendData) => (
-              <MenuItem value={field.value} key={field.id}>
+              <MenuItem value={field.value} key={field?.id}>
                 {field.value}
               </MenuItem>
             ))}

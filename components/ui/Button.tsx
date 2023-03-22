@@ -1,16 +1,18 @@
 import * as React from 'react';
 import {Button as MaterialButton} from '@mui/material';
+import {Theme} from '@mui/material/styles';
+import {SystemStyleObject} from '@mui/system';
 import {styles} from '@ui/Button.styles';
 
 type VariantName = 'text' | 'contained' | 'outlined';
 type ButtonType = 'submit' | 'reset' | 'button';
 
 interface Props {
-  onClick?: any;
+  onClick?: () => void;
   disabled?: boolean;
   text: string;
   variant: VariantName;
-  sxStyle?: any;
+  sxStyle: SystemStyleObject<Theme>;
   type?: ButtonType;
 }
 

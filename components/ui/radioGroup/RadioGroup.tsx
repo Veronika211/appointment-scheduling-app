@@ -1,28 +1,27 @@
 import * as React from 'react';
 import Radio from '@mui/material/Radio';
-import {FormHelperText, RadioGroup as MaterialRadioGroup} from '@mui/material/';
+import {FormHelperText, RadioGroup as MaterialRadioGroup, Theme} from '@mui/material/';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import {styles} from '@ui/radioGroup/RadioGroup.styles';
+import {SystemStyleObject} from '@mui/system';
+import {FieldError} from 'react-hook-form';
 
 interface Props {
   label?: string;
   firstLabel?: string;
   secondLabel?: string;
-  error?: any;
-  ref?: any;
-  helperText?: any;
+  error?: boolean | FieldError;
+  helperText?: string;
   selectedValue?: string;
-  value?: any;
-  onChange?: any;
-  sx?: any;
+  value?: string;
+  onChange?: () => void;
+  sx?: SystemStyleObject<Theme>;
 }
 
 export const RadioGroup: React.FC<Props> = React.forwardRef(
-  ({
-    label, sx, helperText, firstLabel, error, secondLabel, selectedValue, onChange,
-  }, ref) => (
+  ({label, sx, helperText, firstLabel, error, secondLabel, selectedValue, onChange}, ref) => (
     <FormControl error={!!error} sx={[styles.container, sx]}>
       <FormLabel id="demo-radio-buttons-group-label">{label}</FormLabel>
       <MaterialRadioGroup

@@ -1,4 +1,5 @@
-import {number, string} from 'prop-types';
+import {FieldError} from 'react-hook-form';
+import {SxProps, Theme} from '@mui/material/styles';
 
 export interface IRoutes {
   path: string;
@@ -44,4 +45,25 @@ export type TAppointmentFormFields =
 export interface IBackendData {
   id: number;
   value: string;
+}
+
+export interface IFormFieldProps {
+  label: string;
+  error?: boolean | FieldError;
+  helperText?: string;
+  style?: SxProps<Theme>;
+  firstLabel?: string;
+  secondLabel?: string;
+  selectedValue?: string;
+}
+
+export interface IRequest {
+  url: string;
+  method: string;
+}
+
+export interface IRequestArgs {
+  body?: object;
+  params?: string[];
+  query?: string[];
 }

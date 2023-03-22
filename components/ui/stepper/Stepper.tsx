@@ -9,7 +9,7 @@ import {Button} from '@ui/Button';
 
 interface Props {
   activeStepProps: number;
-  setActiveStepProps: any;
+  setActiveStepProps: (step: number) => void;
 }
 
 const steps = ['Enter personal data', 'Select sympthoms'];
@@ -32,7 +32,7 @@ export const Stepper: React.FC<Props> = ({activeStepProps, setActiveStepProps}) 
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    setActiveStepProps((prevActiveStep: number) => prevActiveStep - 1);
+    setActiveStepProps(activeStep - 1);
   };
 
   return (
@@ -55,7 +55,6 @@ export const Stepper: React.FC<Props> = ({activeStepProps, setActiveStepProps}) 
           <Typography sx={{mt: 2, mb: 1}}>Step {activeStep + 1}</Typography>
           <Box sx={styles.backButtonContainer}>
             <Button
-              // color="inherit"
               disabled={activeStep === 0}
               onClick={handleBack}
               sxStyle={styles.backButton}
