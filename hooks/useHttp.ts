@@ -15,6 +15,7 @@ enum ActionTypes {
   FETCH_ERROR = 'FETCH_ERROR',
 }
 
+type PayloadType = string | IBackendData[] | IRequestArgs;
 interface IAction {
   type: ActionTypes;
   payload: any;
