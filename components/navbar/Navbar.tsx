@@ -28,7 +28,7 @@ export const Navbar = () => {
           indicatorColor="primary"
           onChange={(e, value) => setTabValue(value)}
         >
-          <Tab label="Home" onClick={() => handleOnClick('/')} />
+          <Tab label="Home" onClick={() => handleOnClick('')} />
           <Tab label="Contact" onClick={() => handleOnClick('contact')} />
         </Tabs>
         <Button variant="text" text="LOG OUT" sxStyle={styles.button} onClick={handleLogOut} />
