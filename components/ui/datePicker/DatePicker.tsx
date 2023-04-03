@@ -11,17 +11,25 @@ interface Props {
   sxStyle?: SxProps<Theme>;
   name?: string;
   onBlur?: () => void;
+  testId?: string;
   inputRef?: React.Ref<HTMLInputElement>;
 }
 
-export const DatePicker: React.FC<Props> = ({onChange, inputRef, sxStyle, value, ...rest}) => (
+export const DatePicker: React.FC<Props> = ({
+  onChange,
+  testId,
+  inputRef,
+  sxStyle,
+  value,
+  ...rest
+}) => (
   <Box sx={sxStyle}>
     <MaterialDatePicker
       inputRef={inputRef}
       onChange={onChange}
       value={value}
       {...rest}
-      renderInput={(params) => <TextField {...params} />}
+      renderInput={(params) => <TextField {...params} data-testid={testId} />}
     />
   </Box>
 );

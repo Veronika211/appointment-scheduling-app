@@ -77,7 +77,7 @@ export const SymptomsForm: React.FC<Props> = ({
   };
 
   return (
-    <Box sx={styles.mainContainer}>
+    <Box sx={styles.mainContainer} data-testid="symptoms-form-title">
       <Typography variant="h5" sx={styles.title}>
         Select your symptoms:
       </Typography>
@@ -94,6 +94,7 @@ export const SymptomsForm: React.FC<Props> = ({
                   secondLabel="No"
                   sx={styles.leftElement}
                   error={errors.headache}
+                  testId="headache"
                   helperText={errors.headache?.message}
                   {...field}
                 />
@@ -109,6 +110,7 @@ export const SymptomsForm: React.FC<Props> = ({
                   firstLabel="Yes"
                   secondLabel="No"
                   sx={styles.leftElement}
+                  data-testid="abdominalPain"
                   error={errors.abdominalPain}
                   helperText={errors.abdominalPain?.message}
                   {...field}
@@ -219,11 +221,18 @@ export const SymptomsForm: React.FC<Props> = ({
             rows={4}
             label="If you have another symptom type it here: "
             value={additionalField}
+            data-testid="anotherSymptomMultiline"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setAdditionalField(event.target.value)
             }
           />
-          <Button variant="contained" text="Submit" type="submit" sxStyle={styles.submitButton} />
+          <Button
+            variant="contained"
+            data-testid="submitButton"
+            text="Submit"
+            type="submit"
+            sxStyle={styles.submitButton}
+          />
         </Box>
       </form>
     </Box>

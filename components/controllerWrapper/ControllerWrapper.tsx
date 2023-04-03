@@ -23,7 +23,8 @@ export const ControllerWrapper: React.FC<Props> = ({
   defaultValue,
   componentProps,
 }): JSX.Element => {
-  const {label, style, error, helperText, firstLabel, secondLabel, selectedValue} = componentProps;
+  const {label, style, error, testId, helperText, firstLabel, secondLabel, selectedValue} =
+    componentProps;
   const renderAppropriateField = ({
     field,
   }: {
@@ -40,6 +41,7 @@ export const ControllerWrapper: React.FC<Props> = ({
           style={style}
           error={!!error}
           helperText={helperText}
+          data-testid={testId}
         />
       );
     }
@@ -50,6 +52,7 @@ export const ControllerWrapper: React.FC<Props> = ({
           firstLabel={firstLabel}
           secondLabel={secondLabel}
           sx={style}
+          testId={testId}
           error={error}
           helperText={helperText}
           selectedValue={selectedValue}
@@ -66,6 +69,7 @@ export const ControllerWrapper: React.FC<Props> = ({
           onBlur={field.onBlur}
           value={field.value}
           inputRef={field.ref}
+          testId={testId}
         />
       );
     }

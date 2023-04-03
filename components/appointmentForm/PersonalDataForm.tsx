@@ -100,6 +100,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
       appointmentDate: getOnlyDate(convertToISOString(data.appointmentDate)),
       pickedTime: selectedTime,
     };
+    console.log('kliknuto');
     setActiveStep();
     setPersonalData(dataToSend);
   };
@@ -115,6 +116,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
               error: !!firstName,
               helperText: firstName?.message,
               style: styles.leftElement,
+              testId: 'firstName',
             }}
             name="firstName"
             control={control}
@@ -126,6 +128,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
               label: 'Last name',
               error: !!lastName,
               helperText: lastName?.message,
+              testId: 'lastName',
             }}
             name="lastName"
             control={control}
@@ -138,6 +141,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
             componentProps={{
               label: 'Phone number',
               error: !!phoneNumber,
+              testId: 'phoneNumber',
               helperText: phoneNumber?.message,
               style: styles.leftElement,
             }}
@@ -150,6 +154,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
             componentType="datePicker"
             componentProps={{
               label: 'Date of birth',
+              testId: 'dateOfBirth',
               style: [styles.datePicker, styles.leftElement],
             }}
             name="dateOfBirth"
@@ -162,6 +167,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
             componentProps={{
               label: 'Email',
               error: !!email,
+              testId: 'email',
               helperText: email?.message,
             }}
             name="email"
@@ -180,6 +186,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
             onChangeProps={(value: string) => {
               setExamFieldState(value);
             }}
+            testId="examField"
           >
             {examFields.map((field: IBackendData) => (
               <MenuItem value={field.value} key={field?.id}>
@@ -195,6 +202,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
             name="examType"
             control={control}
             error={!!examType}
+            testId="examType"
           >
             {examFieldState !== '' ? (
               examTypes.map((oneType: IBackendData) => (
@@ -212,6 +220,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
             componentProps={{
               label: 'Date of appointment',
               style: [styles.datePicker, styles.leftElement],
+              testId: 'dateOfAppointment',
             }}
             name="appointmentDate"
             control={control}
@@ -223,6 +232,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
             <TimeBox
               name="pickedTime"
               value={time.value}
+              testId="pickedTime"
               selectedTime={selectedTime === time.value}
               key={time.id}
               onClick={() => setSelectedTime(time.value)}
@@ -240,6 +250,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
             firstLabel: 'Yes',
             secondLabel: 'No',
             error: firstTimeVisit,
+            testId: 'firstTimeVisit',
             helperText: firstTimeVisit?.message,
             selectedValue: personalData.firstTimeVisit,
           }}
@@ -248,7 +259,13 @@ export const PersonalDataForm: React.FC<IProps> = ({
         />
 
         <Box sx={styles.row}>
-          <Button variant="contained" type="submit" text="Next" sxStyle={styles.button} />
+          <Button
+            variant="contained"
+            testId="nextButton"
+            type="submit"
+            text="Next"
+            sxStyle={styles.button}
+          />
         </Box>
       </form>
     </Box>

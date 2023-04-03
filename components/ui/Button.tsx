@@ -14,9 +14,18 @@ interface Props {
   variant: VariantName;
   sxStyle: SystemStyleObject<Theme>;
   type?: ButtonType;
+  testId?: string;
 }
 
-export const Button: React.FC<Props> = ({onClick, sxStyle, variant, text, type, ...rest}) => (
+export const Button: React.FC<Props> = ({
+  onClick,
+  sxStyle,
+  testId,
+  variant,
+  text,
+  type,
+  ...rest
+}) => (
   <MaterialButton
     size="large"
     sx={[styles.btn, sxStyle, variant === 'contained' && styles.contained]}
@@ -24,6 +33,7 @@ export const Button: React.FC<Props> = ({onClick, sxStyle, variant, text, type, 
     type={type}
     onClick={onClick}
     color="primary"
+    data-testid={testId}
     {...rest}
   >
     {text}

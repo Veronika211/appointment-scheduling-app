@@ -13,6 +13,7 @@ interface Props {
   inputRef?: any;
   control?: any;
   error?: any;
+  testId?: string;
 }
 
 export const Select: React.FC<Props> = ({
@@ -23,6 +24,7 @@ export const Select: React.FC<Props> = ({
   defaultValue,
   label,
   children,
+  testId,
   ...rest
 }) => (
   <FormControl {...rest}>
@@ -40,6 +42,7 @@ export const Select: React.FC<Props> = ({
           value={value}
           label={label}
           sx={sxStyle}
+          data-testid={testId}
         >
           {children}
         </MaterialSelect>

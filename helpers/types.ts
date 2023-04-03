@@ -55,6 +55,7 @@ export interface IFormFieldProps {
   firstLabel?: string;
   secondLabel?: string;
   selectedValue?: string;
+  testId?: string;
 }
 
 export interface IRequest {

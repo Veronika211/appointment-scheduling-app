@@ -43,7 +43,7 @@ export const AppointmentForm = (): JSX.Element => {
 
   return (
     <Box sx={styles.formContainer}>
-      <Box sx={styles.title}>
+      <Box sx={styles.title} data-testid="appointmentTitle">
         <Typography variant="h4">Request an Appointment</Typography>
       </Box>
       <Stepper

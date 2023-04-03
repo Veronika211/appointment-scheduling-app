@@ -18,16 +18,21 @@ interface Props {
   value?: string;
   onChange?: () => void;
   sx?: SystemStyleObject<Theme>;
+  testId?: string;
 }
 
 export const RadioGroup: React.FC<Props> = React.forwardRef(
-  ({label, sx, helperText, firstLabel, error, secondLabel, selectedValue, onChange}, ref) => (
+  (
+    {label, sx, helperText, firstLabel, testId, error, secondLabel, selectedValue, onChange},
+    ref,
+  ) => (
     <FormControl error={!!error} sx={[styles.container, sx]}>
       <FormLabel id="demo-radio-buttons-group-label">{label}</FormLabel>
       <MaterialRadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
         defaultValue={selectedValue}
         ref={ref}
+        data-testid={testId}
         onChange={onChange}
       >
         <FormControlLabel value="yes" control={<Radio />} label={firstLabel} />

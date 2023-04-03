@@ -7,10 +7,15 @@ interface Props {
   name?: string;
   onClick: () => void;
   selectedTime: boolean;
+  testId?: string;
 }
 
-export const TimeBox: React.FC<Props> = ({value, onClick, selectedTime}) => (
-  <Box sx={[styles.container, selectedTime && styles.selectedBox]} onClick={onClick}>
+export const TimeBox: React.FC<Props> = ({value, testId, onClick, selectedTime}) => (
+  <Box
+    sx={[styles.container, selectedTime && styles.selectedBox]}
+    onClick={onClick}
+    data-testid={testId}
+  >
     <Typography>{value}</Typography>
   </Box>
 );
