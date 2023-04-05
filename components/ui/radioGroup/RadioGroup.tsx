@@ -26,17 +26,26 @@ export const RadioGroup: React.FC<Props> = React.forwardRef(
     {label, sx, helperText, firstLabel, testId, error, secondLabel, selectedValue, onChange},
     ref,
   ) => (
-    <FormControl error={!!error} sx={[styles.container, sx]}>
-      <FormLabel id="demo-radio-buttons-group-label">{label}</FormLabel>
+    <FormControl error={!!error} sx={[styles.container, sx]} data-testid={testId}>
+      <FormLabel id={`${testId}-label`}>{label}</FormLabel>
       <MaterialRadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
+        aria-labelledby={`${testId}-label`}
         defaultValue={selectedValue}
         ref={ref}
-        data-testid={testId}
         onChange={onChange}
       >
-        <FormControlLabel value="yes" control={<Radio />} label={firstLabel} />
-        <FormControlLabel value="no" control={<Radio />} label={secondLabel} />
+        <FormControlLabel
+          value="yes"
+          control={<Radio />}
+          label={firstLabel}
+          data-testid={`${testId}-${firstLabel}`}
+        />
+        <FormControlLabel
+          value="no"
+          control={<Radio />}
+          data-testid={`${testId}-${secondLabel}`}
+          label={secondLabel}
+        />
       </MaterialRadioGroup>
       <FormHelperText>{helperText}</FormHelperText>
     </FormControl>

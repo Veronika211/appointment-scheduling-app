@@ -81,7 +81,7 @@ export const SymptomsForm: React.FC<Props> = ({
       <Typography variant="h5" sx={styles.title}>
         Select your symptoms:
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} data-testid="symptoms-form">
         <Box sx={styles.radioGroupContainer}>
           <Box sx={styles.radioGroupRow}>
             <Controller
@@ -110,7 +110,7 @@ export const SymptomsForm: React.FC<Props> = ({
                   firstLabel="Yes"
                   secondLabel="No"
                   sx={styles.leftElement}
-                  data-testid="abdominalPain"
+                  testId="abdominalPain"
                   error={errors.abdominalPain}
                   helperText={errors.abdominalPain?.message}
                   {...field}
@@ -129,6 +129,7 @@ export const SymptomsForm: React.FC<Props> = ({
                   secondLabel="No"
                   sx={styles.leftElement}
                   error={errors.dizziness}
+                  testId="dizziness"
                   helperText={errors.dizziness?.message}
                   {...field}
                 />
@@ -144,6 +145,7 @@ export const SymptomsForm: React.FC<Props> = ({
                   secondLabel="No"
                   sx={styles.leftElement}
                   error={errors.tingling}
+                  testId="tingling"
                   helperText={errors.tingling?.message}
                   {...field}
                 />
@@ -161,6 +163,7 @@ export const SymptomsForm: React.FC<Props> = ({
                   secondLabel="No"
                   sx={styles.leftElement}
                   error={errors.musclePain}
+                  testId="musclePain"
                   helperText={errors.musclePain?.message}
                   {...field}
                 />
@@ -177,6 +180,7 @@ export const SymptomsForm: React.FC<Props> = ({
                   secondLabel="No"
                   sx={styles.leftElement}
                   error={errors.anxiety}
+                  testId="anxiety"
                   helperText={errors.anxiety?.message}
                   {...field}
                 />
@@ -194,6 +198,7 @@ export const SymptomsForm: React.FC<Props> = ({
                   secondLabel="No"
                   sx={styles.leftElement}
                   error={errors.alcohol}
+                  testId="alcohol"
                   helperText={errors.alcohol?.message}
                   {...field}
                 />
@@ -208,6 +213,7 @@ export const SymptomsForm: React.FC<Props> = ({
                   firstLabel="Yes"
                   secondLabel="No"
                   error={errors.smoker}
+                  testId="smoker"
                   helperText={errors.smoker?.message}
                   {...field}
                 />
