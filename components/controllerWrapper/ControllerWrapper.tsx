@@ -41,7 +41,7 @@ export const ControllerWrapper: React.FC<Props> = ({
           style={style}
           error={!!error}
           helperText={helperText}
-          data-testid={testId}
+          testId={testId}
         />
       );
     }

@@ -27,8 +27,8 @@ export const Select: React.FC<Props> = ({
   testId,
   ...rest
 }) => (
-  <FormControl {...rest}>
-    <InputLabel>{label}</InputLabel>
+  <FormControl data-testid={`form-control-${testId}`} {...rest}>
+    <InputLabel id={label}>{label}</InputLabel>
     <Controller
       render={({field: {onChange, onBlur, value}}) => (
         <MaterialSelect
@@ -42,7 +42,10 @@ export const Select: React.FC<Props> = ({
           value={value}
           label={label}
           sx={sxStyle}
-          data-testid={testId}
+          aria-labelledby={label}
+          inputProps={{
+            'data-testid': testId,
+          }}
         >
           {children}
         </MaterialSelect>

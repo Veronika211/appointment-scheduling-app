@@ -29,7 +29,9 @@ export const DatePicker: React.FC<Props> = ({
       onChange={onChange}
       value={value}
       {...rest}
-      renderInput={(params) => <TextField {...params} data-testid={testId} />}
+      renderInput={(params) => (
+        <TextField {...params} inputProps={{...params.inputProps, 'data-testid': testId}} />
+      )}
     />
   </Box>
 );

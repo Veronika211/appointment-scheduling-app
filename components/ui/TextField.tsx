@@ -15,6 +15,7 @@ interface Props {
   rows?: number;
   multiline?: boolean;
   helperText?: string;
+  testId?: string;
 }
 
 export const TextField: React.FC<Props> = ({
@@ -30,6 +31,7 @@ export const TextField: React.FC<Props> = ({
   defaultValue,
   rows,
   inputRef,
+  testId,
   ...rest
 }) => (
   <MaterialTextField
@@ -45,6 +47,7 @@ export const TextField: React.FC<Props> = ({
     name={name}
     defaultValue={defaultValue}
     helperText={helperText}
+    inputProps={{'data-testid': testId}}
     {...rest}
   />
 );

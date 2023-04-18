@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Box, MenuItem, Typography} from '@mui/material';
 import {Select} from '@ui/select/Select';
 import {Button} from '@ui/Button';
@@ -9,14 +9,15 @@ import {TimeBox} from '@ui/timeBox/TimeBox';
 import {IAppointmentFormInputs, IBackendData} from '@helpers/types';
 import {ControllerWrapper} from 'components/controllerWrapper/ControllerWrapper';
 import {useForm} from 'react-hook-form';
-import useHttp from 'hooks/useHttp';
-import * as requests from 'api/http-requests';
 import {convertToISOString, getOnlyDate} from 'utility/dateUtilities';
 
 interface IProps {
   setActiveStep: () => void;
   personalData: IAppointmentFormInputs;
   setPersonalData: React.Dispatch<React.SetStateAction<IAppointmentFormInputs>>;
+  examFields: any;
+  examTypes: any;
+  availableTimes: any;
 }
 
 interface IDefaultValues {
@@ -44,22 +45,25 @@ export const PersonalDataForm: React.FC<IProps> = ({
   setActiveStep,
   personalData,
   setPersonalData,
+  examFields,
+  examTypes,
+  availableTimes,
 }) => {
-  const {
-    data: examFields,
-    error: examFieldsError,
-    sendRequest: getExamFields,
-  } = useHttp(requests.getExamFields());
-  const {
-    data: examTypes,
-    error: examTypesError,
-    sendRequest: getExamTypes,
-  } = useHttp(requests.getExamTypes());
-  const {
-    data: availableTimes,
-    error: availableTimesError,
-    sendRequest: getAvailableTimes,
-  } = useHttp(requests.getAvailableTimes());
+  // const {
+  //   data: examFields,
+  //   error: examFieldsError,
+  //   sendRequest: getExamFields,
+  // } = useHttp(requests.getExamFields());
+  // const {
+  //   data: examTypes,
+  //   error: examTypesError,
+  //   sendRequest: getExamTypes,
+  // } = useHttp(requests.getExamTypes());
+  // const {
+  //   data: availableTimes,
+  //   error: availableTimesError,
+  //   sendRequest: getAvailableTimes,
+  // } = useHttp(requests.getAvailableTimes());
   const {
     handleSubmit,
     control,
@@ -76,17 +80,17 @@ export const PersonalDataForm: React.FC<IProps> = ({
   const [examFieldState, setExamFieldState] = useState(personalData.examField);
   const [selectedTimeError, setSelectedTimeError] = useState(false);
 
-  useEffect(() => {
-    getExamFields();
-    getExamTypes();
-    getAvailableTimes();
-  }, []);
+  // useEffect(() => {
+  //   getExamFields();
+  //   getExamTypes();
+  //   getAvailableTimes();
+  // }, []);
 
-  useEffect(() => {
-    if (examFieldsError || examTypesError || availableTimesError) {
-      alert('There was a problem with fetching exam data!');
-    }
-  }, [examFieldsError, examTypesError, availableTimesError]);
+  // useEffect(() => {
+  //   if (examFieldsError || examTypesError || availableTimesError) {
+  //     alert('There was a problem with fetching exam data!');
+  //   }
+  // }, [examFieldsError, examTypesError, availableTimesError]);
 
   const onSubmit = (data: IAppointmentFormInputs) => {
     if (selectedTime === '') {
@@ -100,7 +104,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
       appointmentDate: getOnlyDate(convertToISOString(data.appointmentDate)),
       pickedTime: selectedTime,
     };
-    console.log('kliknuto');
+
     setActiveStep();
     setPersonalData(dataToSend);
   };
@@ -188,7 +192,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
             }}
             testId="examField"
           >
-            {examFields.map((field: IBackendData) => (
+            {examFields?.map((field: IBackendData) => (
               <MenuItem value={field.value} key={field?.id}>
                 {field.value}
               </MenuItem>
@@ -205,7 +209,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
             testId="examType"
           >
             {examFieldState !== '' ? (
-              examTypes.map((oneType: IBackendData) => (
+              examTypes?.map((oneType: IBackendData) => (
                 <MenuItem value={oneType.value} key={oneType.id}>
                   {oneType.value}
                 </MenuItem>
@@ -228,11 +232,11 @@ export const PersonalDataForm: React.FC<IProps> = ({
           />
         </Box>
         <Box sx={styles.timeBox}>
-          {availableTimes.map((time: IBackendData) => (
+          {availableTimes?.map((time: IBackendData) => (
             <TimeBox
               name="pickedTime"
               value={time.value}
-              testId="pickedTime"
+              testId={`pickedTime-${time.value}`}
               selectedTime={selectedTime === time.value}
               key={time.id}
               onClick={() => setSelectedTime(time.value)}
@@ -261,7 +265,7 @@ export const PersonalDataForm: React.FC<IProps> = ({
         <Box sx={styles.row}>
           <Button
             variant="contained"
-            testId="nextButton"
+            data-testid="nextButton"
             type="submit"
             text="Next"
             sxStyle={styles.button}

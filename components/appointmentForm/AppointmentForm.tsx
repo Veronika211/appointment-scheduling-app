@@ -1,11 +1,13 @@
 import {Box, Typography} from '@mui/material';
 import {styles} from 'components/appointmentForm/AppointmentForm.styles';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Stepper} from '@ui/stepper/Stepper';
 import {PersonalDataForm} from 'components/appointmentForm/PersonalDataForm';
 import {SymptomsForm} from 'components/appointmentForm/SymptomsForm';
 import {IAppointmentFormInputs} from '@helpers/types';
 import {createStringDate} from 'utility/dateUtilities';
+import useHttp from 'hooks/useHttp';
+import * as requests from 'api/http-requests';
 
 export const AppointmentForm = (): JSX.Element => {
   const [activeStep, setActiveStep] = useState(0);
@@ -21,6 +23,33 @@ export const AppointmentForm = (): JSX.Element => {
     examField: '',
     pickedTime: '',
   });
+  const {
+    data: examFields,
+    error: examFieldsError,
+    sendRequest: getExamFields,
+  } = useHttp(requests.getExamFields());
+  const {
+    data: examTypes,
+    error: examTypesError,
+    sendRequest: getExamTypes,
+  } = useHttp(requests.getExamTypes());
+  const {
+    data: availableTimes,
+    error: availableTimesError,
+    sendRequest: getAvailableTimes,
+  } = useHttp(requests.getAvailableTimes());
+
+  useEffect(() => {
+    if (examFieldsError || examTypesError || availableTimesError) {
+      alert('There was a problem with fetching exam data!');
+    }
+  }, [examFieldsError, examTypesError, availableTimesError]);
+
+  useEffect(() => {
+    getExamFields();
+    getExamTypes();
+    getAvailableTimes();
+  }, []);
 
   const renderAppropriateForm = () => {
     if (activeStep === 0) {
@@ -29,6 +58,9 @@ export const AppointmentForm = (): JSX.Element => {
           setActiveStep={() => setActiveStep(activeStep + 1)}
           personalData={personalData}
           setPersonalData={setPersonalData}
+          examFields={examFields}
+          examTypes={examTypes}
+          availableTimes={availableTimes}
         />
       );
     }
