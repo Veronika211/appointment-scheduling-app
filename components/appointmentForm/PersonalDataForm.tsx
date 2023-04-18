@@ -49,21 +49,6 @@ export const PersonalDataForm: React.FC<IProps> = ({
   examTypes,
   availableTimes,
 }) => {
-  // const {
-  //   data: examFields,
-  //   error: examFieldsError,
-  //   sendRequest: getExamFields,
-  // } = useHttp(requests.getExamFields());
-  // const {
-  //   data: examTypes,
-  //   error: examTypesError,
-  //   sendRequest: getExamTypes,
-  // } = useHttp(requests.getExamTypes());
-  // const {
-  //   data: availableTimes,
-  //   error: availableTimesError,
-  //   sendRequest: getAvailableTimes,
-  // } = useHttp(requests.getAvailableTimes());
   const {
     handleSubmit,
     control,
