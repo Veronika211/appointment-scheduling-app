@@ -197,7 +197,7 @@ describe('AppointmentForm', () => {
       options[1].click();
     });
 
-    const examFieldInput = screen.getByTestId('examField');
+    const examFieldInput = screen.getByTestId('examField') as HTMLInputElement;
     await waitFor(() => {
       expect(examFieldInput.value).toEqual('Pulmology');
     });
@@ -215,7 +215,7 @@ describe('AppointmentForm', () => {
       fireEvent.mouseDown(options[1]);
       options[1].click();
     });
-    const examTypeInput = screen.getByTestId('examType');
+    const examTypeInput = screen.getByTestId('examType') as HTMLInputElement;
     expect(examTypeInput.value).toEqual('Ultrasound');
 
     const time = screen.getByTestId('pickedTime-10:00 AM');
