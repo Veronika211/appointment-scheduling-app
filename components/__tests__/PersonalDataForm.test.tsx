@@ -1,10 +1,9 @@
-import {act, fireEvent, getByTestId, render, screen, waitFor, within} from '@testing-library/react';
+import {act, fireEvent, render, screen, waitFor, within} from '@testing-library/react';
 import {PersonalDataForm} from 'components/appointmentForm/PersonalDataForm';
 import {withLocalizationProvider} from 'jest.setup';
 import React from 'react';
 import {createStringDate} from 'utility/dateUtilities';
 import useHttpMock from 'hooks/useHttp';
-import userEvent from '@testing-library/user-event';
 
 jest.mock('hooks/useHttp', () =>
   jest.fn(() => ({
@@ -32,6 +31,27 @@ const availableTimesData = [
   {id: 6, value: '14:00 AM'},
 ];
 
+beforeEach(() => {
+  (useHttpMock as jest.Mock)
+    .mockReturnValueOnce({
+      data: examFieldsData,
+      error: null,
+      isLoading: false,
+      sendRequest: jest.fn(),
+    })
+    .mockReturnValueOnce({
+      data: examTypesData,
+      error: null,
+      isLoading: false,
+      sendRequest: jest.fn(),
+    })
+    .mockReturnValueOnce({
+      data: availableTimesData,
+      error: null,
+      isLoading: false,
+      sendRequest: jest.fn(),
+    });
+});
 describe('AppointmentForm', () => {
   const setActiveStep = jest.fn();
   const setPersonalData = jest.fn();
@@ -49,27 +69,6 @@ describe('AppointmentForm', () => {
     pickedTime: '',
   };
 
-  // beforeEach(() => {
-  //   (useHttpMock as jest.Mock).mockImplementationOnce(() => ({
-  //     data: examFieldsData,
-  //     error: null,
-  //     isLoading: false,
-  //     sendRequest: jest.fn(),
-  //   }));
-  //   (useHttpMock as jest.Mock).mockImplementationOnce(() => ({
-  //     data: examTypesData,
-  //     error: null,
-  //     isLoading: false,
-  //     sendRequest: jest.fn(),
-  //   }));
-  //   (useHttpMock as jest.Mock).mockImplementationOnce(() => ({
-  //     data: availableTimesData,
-  //     error: null,
-  //     isLoading: false,
-  //     sendRequest: jest.fn(),
-  //   }));
-  // });
-
   it('displays validation errors when fields are not filled out', async () => {
     render(
       withLocalizationProvider(
@@ -77,6 +76,9 @@ describe('AppointmentForm', () => {
           setActiveStep={setActiveStep}
           personalData={personalData}
           setPersonalData={setPersonalData}
+          examFields={examFieldsData}
+          examTypes={examTypesData}
+          availableTimes={availableTimesData}
         />,
       ),
     );
@@ -90,26 +92,6 @@ describe('AppointmentForm', () => {
   });
 
   it('renders form with backend data without errors', async () => {
-    (useHttpMock as jest.Mock).mockReturnValueOnce({
-      data: examFieldsData,
-      error: null,
-      isLoading: false,
-      sendRequest: jest.fn(),
-    });
-
-    (useHttpMock as jest.Mock).mockReturnValueOnce({
-      data: examTypesData,
-      error: null,
-      isLoading: false,
-      sendRequest: jest.fn(),
-    });
-
-    (useHttpMock as jest.Mock).mockReturnValueOnce({
-      data: availableTimesData,
-      error: null,
-      isLoading: false,
-      sendRequest: jest.fn(),
-    });
     render(
       withLocalizationProvider(
         <PersonalDataForm
@@ -144,41 +126,32 @@ describe('AppointmentForm', () => {
     });
   });
 
+  it('checks if exam type options are not displayed when exam field is not selected', async () => {
+    render(
+      withLocalizationProvider(
+        <PersonalDataForm
+          setActiveStep={setActiveStep}
+          personalData={personalData}
+          setPersonalData={setPersonalData}
+          examFields={examFieldsData}
+          examTypes={examTypesData}
+          availableTimes={availableTimesData}
+        />,
+      ),
+    );
+
+    expect(screen.getByTestId('form-control-examField')).toBeInTheDocument();
+    const examTypeSelect = screen.getByTestId('form-control-examType');
+    const examTypeSelectButton = within(examTypeSelect).getByRole('button');
+    act(() => {
+      examTypeSelectButton.focus();
+      fireEvent.mouseDown(examTypeSelectButton);
+    });
+
+    expect(screen.getByText('You must choose exam field first.')).toBeInTheDocument();
+  });
+
   it('calls setActiveStep and setPersonalData when valid data is provided', async () => {
-    (useHttpMock as jest.Mock)
-      .mockReturnValueOnce({
-        data: examFieldsData,
-        error: null,
-        isLoading: false,
-        sendRequest: jest.fn(),
-      })
-      .mockReturnValueOnce({
-        data: examTypesData,
-        error: null,
-        isLoading: false,
-        sendRequest: jest.fn(),
-      })
-      .mockReturnValueOnce({
-        data: availableTimesData,
-        error: null,
-        isLoading: false,
-        sendRequest: jest.fn(),
-      });
-
-    // (useHttpMock as jest.Mock).mockReturnValueOnce({
-    //   data: examTypesData,
-    //   error: null,
-    //   isLoading: false,
-    //   sendRequest: jest.fn(),
-    // });
-
-    // (useHttpMock as jest.Mock).mockReturnValueOnce({
-    //   data: availableTimesData,
-    //   error: null,
-    //   isLoading: false,
-    //   sendRequest: jest.fn(),
-    // });
-
     render(
       withLocalizationProvider(
         <PersonalDataForm
@@ -236,8 +209,7 @@ describe('AppointmentForm', () => {
     });
 
     expect(screen.getByRole('listbox', {hidden: false})).not.toEqual(null);
-    // });
-    screen.debug(null, 20000);
+
     act(() => {
       const options = screen.getAllByRole('option');
       fireEvent.mouseDown(options[1]);
@@ -251,13 +223,11 @@ describe('AppointmentForm', () => {
       fireEvent.click(time);
     });
 
-    // screen.debug(null, 20000);
-
     const nextButton = screen.getByTestId('nextButton');
     expect(nextButton).toBeInTheDocument();
 
     fireEvent.click(nextButton);
-    // });
+
     await waitFor(() => {
       expect(setActiveStep).toHaveBeenCalled();
     });
