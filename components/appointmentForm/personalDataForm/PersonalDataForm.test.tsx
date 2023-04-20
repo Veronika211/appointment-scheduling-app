@@ -1,5 +1,5 @@
 import {act, fireEvent, render, screen, waitFor, within} from '@testing-library/react';
-import {PersonalDataForm} from 'components/appointmentForm/PersonalDataForm';
+import {PersonalDataForm} from 'components/appointmentForm/personalDataForm/PersonalDataForm';
 import {withLocalizationProvider} from 'jest.setup';
 import React from 'react';
 import {createStringDate} from 'utility/dateUtilities';

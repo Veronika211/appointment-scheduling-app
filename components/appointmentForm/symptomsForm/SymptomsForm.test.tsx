@@ -1,5 +1,5 @@
 import {fireEvent, render, screen, waitFor} from '@testing-library/react';
-import {SymptomsForm} from 'components/appointmentForm/SymptomsForm';
+import {SymptomsForm} from 'components/appointmentForm/symptomsForm/SymptomsForm';
 
 it('should submit the form and reset form data when the submit button is clicked', async () => {
   const setActiveStep = jest.fn();

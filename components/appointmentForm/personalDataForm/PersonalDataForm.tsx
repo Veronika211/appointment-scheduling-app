@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Box, MenuItem, Typography} from '@mui/material';
 import {Select} from '@ui/select/Select';
 import {Button} from '@ui/Button';
-import {styles} from 'components/appointmentForm/PersonalDataForm.styles';
+import {styles} from 'components/appointmentForm/personalDataForm/PersonalDataForm.styles';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {TimeBox} from '@ui/timeBox/TimeBox';

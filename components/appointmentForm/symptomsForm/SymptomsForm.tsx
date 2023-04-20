@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Box, Typography} from '@mui/material';
-import {styles} from 'components/appointmentForm/SymptomsForm.styles';
+import {styles} from 'components/appointmentForm/symptomsForm/SymptomsForm.styles';
 import {TextField} from '@ui/TextField';
 import {RadioGroup} from '@ui/radioGroup/RadioGroup';
 import {Button} from '@ui/Button';
